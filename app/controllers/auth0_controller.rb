@@ -8,7 +8,6 @@ class Auth0Controller < ApplicationController
     redirect_to '/dashboard'
   end
   def loggedinas
-    render html: @userdata
   end
 
 
