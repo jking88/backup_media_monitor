@@ -1,4 +1,4 @@
-class Auth0Controller < SecuredController
+class Auth0Controller < ApplicationController
   def callback
     # This stores all the user information that came from Auth0
     # and the IdP
@@ -6,8 +6,13 @@ class Auth0Controller < SecuredController
     @user = session[:userinfo]
 
     # Redirect to the URL you want after successfull auth
-    redirect_to 'dashboard'
+    redirect_to '/dashboard'
   end
+
+  def show
+
+  end
+
 
 
 
