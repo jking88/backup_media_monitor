@@ -3,6 +3,7 @@ class Auth0Controller < ApplicationController
     # This stores all the user information that came from Auth0
     # and the IdP
     session[:userinfo] = request.env['omniauth.auth']
+    @userPic = userinfo.picture
 
     # Redirect to the URL you want after successfull auth
     redirect_to '/dashboard'
