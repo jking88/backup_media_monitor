@@ -8,8 +8,6 @@ class Auth0Controller < ApplicationController
     redirect_to '/dashboard'
   end
 
-  def home
-  end
 
 
 
