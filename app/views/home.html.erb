@@ -13,24 +13,24 @@
 
     <div id="sidebar">
         <div id="sidebar-profie">
-        <img class='sidebarPic' src="<% @user[:info][:image] %>"/>
-            <h3><%= @user[:info][:name] %></h3>
+        <img class='sidebarPic' src="<%= @user[:info][:image] %>"/>
+            <h2>Welcome <%= @user[:info][:name] %></h2>
         </div>
         <ul class=sidebarLinks>
-            <li><a href="#"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Profile <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
+            <li><a href="#"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
 
             <li><a href="#"> <%= image_tag("profileIcon.png", id: "navbarImg") %> Profile <%= image_tag("profileIcon.png", class: 'hiddenImg') %></a></li>
 
             <li><a href="#"> <%= image_tag("manageIcon.png", id: "navbarImg") %> Manage <%= image_tag("manageIcon.png", class: 'hiddenImg') %></a></li>
 
-            <li><a href="#"> <%= image_tag("searchIcon.png", id: "navbarImg") %> Manage <%= image_tag("searchIcon.png", class: 'hiddenImg') %></a></li>
+            <li><a href="#"> <%= image_tag("searchIcon.png", id: "navbarImg") %> Search <%= image_tag("searchIcon.png", class: 'hiddenImg') %></a></li>
 
 
-            <li><a href="#"> <%= image_tag("graphsIcon.png", id: "navbarImg") %> Manage <%= image_tag("graphsIcon.png", class: 'hiddenImg') %></a></li>
+            <li><a href="#"> <%= image_tag("graphsIcon.png", id: "navbarImg") %> Graphs <%= image_tag("graphsIcon.png", class: 'hiddenImg') %></a></li>
 
-            <li><a href="#"> <%= image_tag("settingsIcon.png", id: "navbarImg") %> Manage <%= image_tag("settingsIcon.png", class: 'hiddenImg') %></a></li>
+            <li><a href="#"> <%= image_tag("settingsIcon.png", id: "navbarImg") %> Settings <%= image_tag("settingsIcon.png", class: 'hiddenImg') %></a></li>
 
-            <li><a href="#"> <%= image_tag("paymentIcon.png", id: "navbarImg") %> Manage <%= image_tag("paymentIcon.png", class: 'hiddenImg') %></a></li>
+            <li><a href="#"> <%= image_tag("paymentIcon.png", id: "navbarImg") %> Payment <%= image_tag("paymentIcon.png", class: 'hiddenImg') %></a></li>
 
         </ul>
 
