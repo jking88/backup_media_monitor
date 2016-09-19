@@ -7,6 +7,10 @@ class Auth0Controller < ApplicationController
     # Redirect to the URL you want after successfull auth
     redirect_to '/dashboard'
   end
+  def loggedinas
+    render html: @userdata
+  end
+
 
   def failure
     # show a failure page or redirect to an error page
