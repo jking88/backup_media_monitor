@@ -7,8 +7,10 @@ class Auth0Controller < ApplicationController
     # Redirect to the URL you want after successfull auth
     redirect_to '/dashboard'
   end
-  def loggedinas
+
+  def home
   end
+
 
 
   def failure
