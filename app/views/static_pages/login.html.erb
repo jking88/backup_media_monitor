@@ -15,6 +15,7 @@
       if (error) {
         return;
       }
+    redirectUrl: 'http://45.55.129.215:3000/auth0/show'
     localStorage.setItem('idToken', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
     });
@@ -24,6 +25,15 @@ document.getElementById('btn-login').addEventListener('click', function() {
   lock.show();
 });
 
+var token = localStorage.getItem('idToken');
+if (token) {
+  showLoggedIn();
+}
+
+function showLoggedIn() {
+  var profile = JSON.parse(localStorage.getItem('profile'));
+  document.getElementById('name').textContent= profile.name;
+}
 
 
 

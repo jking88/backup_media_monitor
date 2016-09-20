@@ -14,7 +14,7 @@
     <div id="sidebar">
         <div id="sidebar-profie">
 
-            <h2><%= @id_token %></h2>
+            <h2>Welcome <span id='name' class='full_name'></span></h2>
         </div>
         <ul class=sidebarLinks>
             <li><a href="#"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
@@ -42,10 +42,6 @@
 
     </div>
 
-
-
-
-
     </div>
     <div id="body-container">
         <div id="live-feed">
@@ -69,7 +65,15 @@
             });
         });
 
+var token = localStorage.getItem('idToken');
+if (token) {
+  showLoggedIn();
+}
 
+function showLoggedIn() {
+  var profile = JSON.parse(localStorage.getItem('profile'));
+  document.getElementById('name').textContent= profile.name;
+}
 
     </script>
 
