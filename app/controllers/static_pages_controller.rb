@@ -3,6 +3,8 @@ class StaticPagesController < ApplicationController
 
   end
 
+  def error
+  end
 
   def login
   end

@@ -13,9 +13,9 @@
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
       if (error) {
-        return;
+        redirectUrl: 'http://45.55.129.215:3000/static_pages/error';
       }
-    redirectUrl: 'http://45.55.129.215:3000/auth0/show'
+    redirectUrl: 'http://45.55.129.215:3000/auth0/show';
     localStorage.setItem('idToken', authResult.idToken);
     localStorage.setItem('profile', JSON.stringify(profile));
     });
