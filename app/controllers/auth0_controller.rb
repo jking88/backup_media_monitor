@@ -1,22 +1,15 @@
 class Auth0Controller < ApplicationController
   def callback
-    # This stores all the user information that came from Auth0
-    # and the IdP
+     # example request.env['omniauth.auth'] in https://github.com/auth0/omniauth-auth0#auth-hash
+    # id_token = session[:userinfo]['credentials']['id_token']
+    # store the user profile in session and redirect to root
     session[:userinfo] = request.env['omniauth.auth']
-    # Redirect to the URL you want after successfull auth
-    redirect_to '/auth0/show'
+    id_token = session[:userinfo]['credentials']['id_token']
+
+    redirect_to '/'
   end
-
-  def show
-
-  end
-
-
-
-
 
   def failure
-    # show a failure page or redirect to an error page
     @error_msg = request.params['message']
   end
 end
