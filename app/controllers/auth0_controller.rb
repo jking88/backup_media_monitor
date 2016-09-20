@@ -8,6 +8,8 @@ class Auth0Controller < ApplicationController
 
     redirect_to 'http://45.55.129.215:3000/auth0/show'
   end
+  def show
+  end
 
   def failure
     @error_msg = request.params['message']

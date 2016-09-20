@@ -25,15 +25,15 @@ document.getElementById('btn-login').addEventListener('click', function() {
   lock.show();
 });
 
-var token = localStorage.getItem('idToken');
-if (token) {
-  showLoggedIn();
-}
+// var token = localStorage.getItem('idToken');
+// if (token) {
+//   showLoggedIn();
+// }
 
-function showLoggedIn() {
-  var profile = JSON.parse(localStorage.getItem('profile'));
-  document.getElementById('name').textContent= profile.name;
-}
+// function showLoggedIn() {
+//   var profile = JSON.parse(localStorage.getItem('profile'));
+//   document.getElementById('name').textContent= profile.name;
+// }
 
 
 
