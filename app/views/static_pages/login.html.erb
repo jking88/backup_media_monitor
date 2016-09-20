@@ -12,18 +12,15 @@
    );
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
-      if (error) {
-        redirectUrl: 'http://45.55.129.215:3000/static_pages/error';
-      }
-    redirectUrl: 'http://45.55.129.215:3000/auth0/show';
-    localStorage.setItem('idToken', authResult.idToken);
-    localStorage.setItem('profile', JSON.stringify(profile));
+
+    // sessionStorage.setItem('idToken', authResult.idToken);
+    sessionStorage.setItem('profile', JSON.stringify(profile));
+    document.getElementById("result").innerHTML = sessionStorage.getItem("profile");
+
     });
   });
 
-document.getElementById('btn-login').addEventListener('click', function() {
-  lock.show();
-});
+
 
 // var token = localStorage.getItem('idToken');
 // if (token) {
@@ -58,7 +55,7 @@ document.getElementById('btn-login').addEventListener('click', function() {
   //   }
   // });
 </script>
-<button onclick="lock.show()">Login</button>
-
+<button onclick="lock.show()">Login Updated</button>
+<label id = 'result'></label>
 </body>
 </html>

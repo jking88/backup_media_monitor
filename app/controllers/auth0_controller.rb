@@ -6,7 +6,7 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = request.env['omniauth.auth']
     @id_token = session[:userinfo]['credentials']['id_token']
 
-    redirect_to 'http://45.55.129.215:3000/auth0/show'
+    redirect_to 'https://reddit.com'
   end
   def show
   end
