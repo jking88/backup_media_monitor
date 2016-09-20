@@ -6,7 +6,10 @@
 <body>
 <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
 <script type="text/javascript">
-  var lock = new Auth0Lock('kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr', 'bretzsam.auth0.com');
+  var lock = new Auth0Lock(
+   'kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr',
+   'bretzsam.auth0.com'
+   );
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
       if (error) {
@@ -45,7 +48,7 @@ document.getElementById('btn-login').addEventListener('click', function() {
   //   }
   // });
 </script>
-<button id="btn-login">Login</button>
+<button id='btn-login'>Login</button>
 
 </body>
 </html>
