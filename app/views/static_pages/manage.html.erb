@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Manage</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+
+    <div id="sidebar">
+        <div id="sidebar-profile">
+            <img class="sidebarPic" src="person.jpg">
+            <h3>Jonathan King</h3>
+        </div>
+
+        <ul class=sidebarLinks>
+            <li><a href="home"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="profile"> <%= image_tag("profileIcon.png", id: "navbarImg") %> Profile <%= image_tag("profileIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="manage"> <%= image_tag("manageIcon.png", id: "navbarImg") %> Manage <%= image_tag("manageIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="search"> <%= image_tag("searchIcon.png", id: "navbarImg") %> Search <%= image_tag("searchIcon.png", class: 'hiddenImg') %></a></li>
+
+
+            <li><a href="graphs"> <%= image_tag("graphsIcon.png", id: "navbarImg") %> Graphs <%= image_tag("graphsIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="settings"> <%= image_tag("settingsIcon.png", id: "navbarImg") %> Settings <%= image_tag("settingsIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="payment"> <%= image_tag("paymentIcon.png", id: "navbarImg") %> Payment <%= image_tag("paymentIcon.png", class: 'hiddenImg') %></a></li>
+
+        </ul>
+
+
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+
+    </div>
+
+
+
+
+
+    </div>
+    <div id="body-container">
+        <div id="manageBox">
+        <h2>Manage</h2>
+
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#sidebar-btn').click(function() {
+                $('#sidebar').toggleClass('visible');
+                $('#body-container').toggleClass('visible');
+                $('#navRect').toggleClass('visible');
+                $('.hiddenImg').toggle();
+            });
+        });
+
+
+
+    </script>
+
+
+</body>
+</html>

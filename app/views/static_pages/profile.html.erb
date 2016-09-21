@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Profile</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+
+    <div id="sidebar">
+        <div id="sidebar-profile">
+            <img class="sidebarPic" src="person.jpg">
+            <h3>Jonathan King</h3>
+        </div>
+        <ul class=sidebarLinks>
+            <li><a href="home"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="profile"> <%= image_tag("profileIcon.png", id: "navbarImg") %> Profile <%= image_tag("profileIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="manage"> <%= image_tag("manageIcon.png", id: "navbarImg") %> Manage <%= image_tag("manageIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="search"> <%= image_tag("searchIcon.png", id: "navbarImg") %> Search <%= image_tag("searchIcon.png", class: 'hiddenImg') %></a></li>
+
+
+            <li><a href="graphs"> <%= image_tag("graphsIcon.png", id: "navbarImg") %> Graphs <%= image_tag("graphsIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="settings"> <%= image_tag("settingsIcon.png", id: "navbarImg") %> Settings <%= image_tag("settingsIcon.png", class: 'hiddenImg') %></a></li>
+
+            <li><a href="payment"> <%= image_tag("paymentIcon.png", id: "navbarImg") %> Payment <%= image_tag("paymentIcon.png", class: 'hiddenImg') %></a></li>
+
+        </ul>
+
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+
+    </div>
+
+
+
+
+
+    </div>
+    <div id="body-container">
+        <div id="topHeader">
+            <h2>Profile</h2>
+        </div>
+        <div id="profilePic">
+            <img class="profilePic" id="user_pic">
+        </div>
+        <div id="socialMedia">
+            <h1 id = 'name_from_profile'></h1>
+            <ul class=socialMediaLinks>
+                <li><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-512.png"" id="socialMediaIcons"></li>
+                <li><img src="#" id="socialMediaIcons"</li>
+                <li><img src="#" id="socialMediaIcons"</li>
+            </ul>
+        </div>
+
+        <div id="editInfo">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                <label id="result"></label>
+
+
+
+                    <!-- Change Username Section -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title" id="panel1">
+                        <a data-toggle="collapse" href="#collapse1">
+                            <span id="expand1" class="glyphicon glyphicon-chevron-right"></span>&nbsp;Change Username</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">A</li>
+                            <li class="list-group-item">B</li>
+                        </ul>
+                    </div>
+
+
+
+
+                       <!-- Change Password Section -->
+                    <div class="panel-heading">
+                        <h4 class="panel-title" id="panel2">
+                        <a data-toggle="collapse" href="#collapse2">
+                            <span id="expand2" class="glyphicon glyphicon-chevron-right"></span>&nbsp;Change Password</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <ul class="list-group">
+                            <li class="list-group-item">Old Password:
+                            <input type="passowrd" class="form-control" id="oldPassword"</li>
+                            <li class="list-group-item">New Password:
+                             <input type="passowrd" class="form-control" id="newPassword"</li>
+                            <li class="list-group-item">Confirm Password:
+                             <input type="passowrd" class="form-control" id="confirmPassword"</li>
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#sidebar-btn').click(function() {
+                $('#sidebar').toggleClass('visible');
+                $('#body-container').toggleClass('visible');
+                $('#navRect').toggleClass('visible');
+                $('.hiddenImg').toggle();
+            });
+             $('#panel1').click(function() {
+                $('.panel-title #expand1').toggleClass('glyphicon glyphicon-chevron-right glyphicon glyphicon-chevron-down');
+            });
+            $('#panel2').click(function() {
+                $('.panel-title #expand2').toggleClass('glyphicon glyphicon-chevron-right glyphicon glyphicon-chevron-down');
+            });
+
+        });
+        var token = sessionStorage.getItem('idToken');
+
+        if (token) {
+
+            var profile = sessionStorage.getItem("profile");
+
+            document.getElementById("result").innerHTML = profile;
+            document.getElementById('user_pic').src = profile.picture;
+            document.getElementById("name_from_profile").innerHTML = profile.name;
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>

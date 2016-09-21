@@ -13,49 +13,16 @@
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {
 
-    // sessionStorage.setItem('idToken', authResult.idToken);
+
     sessionStorage.setItem('profile', JSON.stringify(profile));
     document.getElementById("result").innerHTML = sessionStorage.getItem("profile");
-
+    callback_path: '/auth0/show'
     });
   });
 
 
-
-// var token = localStorage.getItem('idToken');
-// if (token) {
-//   showLoggedIn();
-// }
-
-// function showLoggedIn() {
-//   var profile = JSON.parse(localStorage.getItem('profile'));
-//   document.getElementById('name').textContent= profile.name;
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //   auth: {
-  //     redirectUrl: 'http://45.55.129.215:3000/auth0/show',
-
-  //     responseType: 'code',
-  //     params: {
-  //       scope: 'openid name picture email' // Learn about scopes: https://auth0.com/docs/scopes
-  //     }
-  //   }
-  // });
 </script>
-<button onclick="lock.show()">Login Updated</button>
+<button onclick="lock.show()">Login</button>
 <label id = 'result'></label>
 </body>
 </html>

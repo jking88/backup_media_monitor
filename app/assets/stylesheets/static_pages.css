@@ -1,75 +1,24 @@
-
 body {
     margin: 0px;
     padding: 0px;
-    overflow: hidden;
+    overflow-x: hidden;
 
 }
 
 #body-container {
+    min-height: 94.9%;
     height: auto;
-    width: 98%;
-    overflow: hidden;
+    width: 97%;
+    overflow-x: hidden;
     left: 60px;
-    top: 100px;
+    top: 3%;
     position: relative;
     transition: left 0.3s linear;
-    background: #ececea
+    background: #ececea;
+    padding-bottom: 3%;
 
 }
 
-#live-feed {
-    width: 50%;
-    height: 850px;
-    margin-top: 30px;
-    margin-left: 50px;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #b4b4b4;
-}
-
-#live-feed-header {
-    border-bottom: 3px solid #b4b4b4;
-    background: white;
-    margin-top: -13px;
-}
-
-
-#live-feed-header h2 {
-    font-family: 'Ubuntu', sans-serif;
-    color: #1f253d;
-    padding-bottom: 8px;
-    margin-top: 13px;
-    padding-top: 12px;
-    padding-left: 20px;
-}
-
-#current-sources {
-    float: right;
-    margin-top: -850px;
-    margin-right: 4%;
-    border-style: solid;
-    border-width: 3px;
-    border-color: #b4b4b4;
-    width: 40%;
-    height: 400px;
-}
-
-#current-sources-header {
-    border-bottom: 3px solid #b4b4b4;
-    background: white;
-    margin-top: -13px;
-}
-
-
-#current-sources-header h2 {
-    font-family: 'Ubuntu', sans-serif;
-    color: #1f253d;
-    padding-bottom: 8px;
-    margin-top: 13px;
-    padding-top: 12px;
-    padding-left: 20px;
-}
 
 #body-container.visible {
     left: 300px;
@@ -82,7 +31,7 @@ body {
     width: 300px;
     height: 100%;
     display: block;
-    position: absolute;
+    position: fixed;
     left: -240px;
     top: 0px;
     transition: left 0.3s linear;
@@ -101,12 +50,30 @@ body {
     margin-right: auto;
 }
 
+#navRect {
+    width: 6px;
+    height: 61px;
+    margin-top: -15px;
+    background: cyan;
+    float: right;
+    margin-right: 3px;
+}
+
+#navRect.visible {
+    width: 6px;
+    height: 61px;
+    margin-top: -15px;
+    background: cyan;
+    float: right;
+    margin-right: -1px;
+}
+
+
 #sidebar-profile h3 {
     color: white;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
     font-weight: 600;
-
 
 }
 
@@ -218,7 +185,7 @@ body {
 }
 
 .sidebarLinks li:nth-child(2) .hiddenImg {
-    padding-right: 13px;
+    padding-right: 14px;
     margin-top: -5px;
 }
 
@@ -256,9 +223,8 @@ body {
     height: 15px;
     cursor: pointer;
     margin: 20px;
-    position: absolute;
+    position: fixed;
     top: 0px;
-    right: -60px;
 
 }
 
@@ -268,4 +234,206 @@ body {
     margin-bottom: 5px;
     display: block;
 }
+
+/*-----------------------Home page-------------------------*/
+
+#topHeader {
+    width: 94%;
+    height: 10%;
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: #1f253d;
+    margin-left: 3%;
+}
+
+#topHeader h2 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #1f253d;
+    font-size: 40px;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-top: 2%;
+}
+
+#col1 {
+    float: left;
+    margin-top: 1%;
+    margin-left: 3%;
+    height: auto;
+    width: 25%;
+}
+
+
+#col2 {
+    float: left;
+    margin-top: 1%;
+    margin-left: 2%;
+    height: auto;
+    width: 40%;
+
+}
+
+
+#col3 {
+    float: left;
+    margin-top: 1%;
+    margin-left: 2%;
+    height: auto;
+    width: 25%;
+
+}
+
+#col-header {
+    width: 100%;
+    height: 5%;
+    background: #1f253d;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#col-header h3 {
+    font-family: 'Ubuntu', sans-serif;
+    padding: 0px;
+    margin: 0px;
+    color: white;
+    padding-top: 2%;
+    padding-left: 3%;
+}
+
+#col2 #col-header h3 {
+    padding-top: 1.1%;
+    padding-left: 2%;
+}
+
+#currentLinks {
+    height: 50%;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #b4b4b4;
+}
+
+#liveFeed {
+    height: 80%;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #b4b4b4;
+}
+
+#liveFeed:hover {
+    background: #e4e4e4;
+}
+
+
+
+#recentStats {
+    height: 60%;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: white;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #b4b4b4
+}
+
+
+
+
+
+/*-----------------------Profile page----------------------*/
+
+#profilePic {
+    height: 35%;
+    width: 30%;
+    margin-top: 50px;
+}
+
+.profilePic {
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 4px;
+    border-color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#socialMedia {
+    float: right;
+    height: 35%;
+    width: 70%;
+    margin-top: -21.6%;
+    padding-top: 3%;
+}
+
+#socialMedia h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 800;
+    font-size: 35pt;
+    color: #1f253d;
+}
+
+#socialMedia .socialMediaLinks #socialMediaIcons {
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10;
+}
+
+#socialMedia li {
+    list-style: none;
+    margin-left: -30px;
+}
+
+#socialMedia li:nth-child(1) #socialMediaIcons {
+    background-color: #3b5998;
+}
+
+#socialMedia li:nth-child(2) #socialMediaIcons {
+    background-color: #4099ff;
+}
+
+#socialMedia li:nth-child(3) #socialMediaIcons {
+    background-color: #39b54a;
+}
+
+#editInfo {
+    margin-top: 0%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.panel-heading {
+   background-color: #e4e4e4;
+   border: solid;
+}
+
+.panel-heading {
+    text-decoration: none;
+}
+
+.panel-title {
+   font-family: 'Ubuntu', sans-serif;
+   font-weight: 500;
+   color: #1f253d;
+}
+
+
+
+
+
+
+
 
