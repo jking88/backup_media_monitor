@@ -2,16 +2,23 @@
 <html>
 <head>
     <title>App Payment</title>
-    <%= javascript_include_tag 'application',
-    'data-turbolinks-track': 'reload' %>
-
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <%= javascript_include_tag 'application',
+    'data-turbolinks-track': 'reload' %>
 </head>
 <body>
+
+    <div id="navbar">
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+    </div>
 
     <div id="sidebar">
         <div id="sidebar-profile">
@@ -37,13 +44,6 @@
 
         </ul>
 
-
-        <div id="sidebar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-
     </div>
 
 
@@ -54,20 +54,6 @@
     <div id="body-container">
         <h2>Payment page</h2>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $('#sidebar-btn').click(function() {
-                $('#sidebar').toggleClass('visible');
-                $('#body-container').toggleClass('visible');
-                $('#navRect').toggleClass('visible');
-                $('.hiddenImg').toggle();
-            });
-        });
-
-
-
-    </script>
 
 
 </body>
