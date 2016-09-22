@@ -2,19 +2,31 @@
 <html>
 <head>
     <title>App Manage</title>
+    <%= javascript_include_tag 'application',
+    'data-turbolinks-track': 'reload' %>
+
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </head>
 <body>
+
+    <div id="navbar">
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+    </div>
 
     <div id="sidebar">
         <div id="sidebar-profile">
             <img class="sidebarPic" src="person.jpg">
             <h3>Jonathan King</h3>
         </div>
+
 
         <ul class=sidebarLinks>
             <li><a href="home"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
@@ -34,13 +46,6 @@
 
         </ul>
 
-
-        <div id="sidebar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-
     </div>
 
 
@@ -49,26 +54,52 @@
 
     </div>
     <div id="body-container">
+        <div id="topHeader">
+            <h2>Manage</h2>
+        </div>
         <div id="manageBox">
-        <h2>Manage</h2>
-
+            <div id="websiteName">
+                <div id="manageHeader">
+                    <h4>Website Name</h4>
+                </div>
+            </div>
+            <div id="websiteURL">
+                 <div id="manageHeader">
+                    <h4>Website URL</h4>
+                </div>
+            </div>
+            <div id="overallMentions">
+                 <div id="manageHeader">
+                    <h4># of Mentions</h4>
+                </div>
+            </div>
+            <div id="tagSearches">
+                 <div id="manageHeader">
+                    <h4># of Keyword Tags</h4>
+                </div>
+            </div>
+                <div id="lastMention">
+                 <div id="manageHeader">
+                    <h4>Last Mention</h4>
+                </div>
+            </div>
+            <div id="frequency">
+                <div id="manageHeader">
+                    <h4>Frequency</h4>
+                </div>
+            </div>
+            <div id="active">
+                <div id="manageHeader">
+                    <h4>Active?</h4>
+                </div>
+            </div>
+            <div id="actions">
+                <div id="manageHeader">
+                    <h4>Actions</h4>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $('#sidebar-btn').click(function() {
-                $('#sidebar').toggleClass('visible');
-                $('#body-container').toggleClass('visible');
-                $('#navRect').toggleClass('visible');
-                $('.hiddenImg').toggle();
-            });
-        });
-
-
-
-    </script>
-
 
 </body>
 </html>

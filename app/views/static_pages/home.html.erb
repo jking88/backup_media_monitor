@@ -2,47 +2,32 @@
 <html>
 <head>
     <title>App Home</title>
+    <%= javascript_include_tag 'application',
+    'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#sidebar-btn').click(function() {
-                $('#sidebar').toggleClass('visible');
-                $('#body-container').toggleClass('visible');
-                $('.hiddenImg').toggle();
-            });
-        });
-        var lock = new Auth0Lock(
-           'kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr',
-           'bretzsam.auth0.com'
-           );
-          lock.on("authenticated", function(authResult) {
-            lock.getProfile(authResult.idToken, function(error, profile) {
-            sessionStorage.setItem('idToken', authResult.idToken);
-            sessionStorage.setItem('profile', JSON.stringify(profile));
-            var profile = sessionStorage.getItem("profile");
-            document.getElementById("result").innerHTML = profile;
-            document.getElementById('nick').innerHTML = profile.nickname;
-            document.getElementById('user_pic').src = profile.picture_large;
-              });
-          });
-
-
-
-    </script>
-    <%= stylesheet_link_tag    'application', media: 'all',
-                                              'data-turbolinks-track': 'reload' %>
+    <script src="global.js"></script>
 </head>
 <body>
 
-    <div id="sidebar">
-        <div id="sidebar-profie">
-            <image id = 'user_pic' class="sidebarPic">
-            <h3>Welcome <label id="nick"></label></h3>
+    <div id="navbar">
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
         </div>
+    </div>
+
+    <div id="sidebar">
+        <div id="sidebar-profile">
+            <img class="sidebarPic" src="person.jpg">
+            <h3>Jonathan King</h3>
+        </div>
+
+
         <ul class=sidebarLinks>
             <li><a href="home"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
 
@@ -61,28 +46,25 @@
 
         </ul>
 
-        <div id="sidebar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-
     </div>
 
-    </div>
+
+
+
+
     </div>
     <div id="body-container">
         <div id="topHeader">
             <h2>Home</h2>
-            <button onclick="lock.show()">Login</button>
-
         </div>
         <div id="col1">
             <div id="col-header">
                 <h3>Current Websites</h3>
             </div>
             <div id="currentLinks">
-            <label id="result"></label>
+            <pre>
+                <%= @first_url %>
+            </pre>
 
             </div>
         </div>
@@ -91,6 +73,9 @@
                 <h3>Live Feed</h3>
             </div>
             <div id="liveFeed">
+            <pre>
+                <%= @data.inspect %>
+            </pre>
 
             </div>
         </div>
@@ -105,8 +90,8 @@
     </div>
 
 
-
-
-
 </body>
 </html>
+
+
+

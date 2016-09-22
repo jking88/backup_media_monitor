@@ -3,12 +3,21 @@
 <head>
     <title>App Graphs</title>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="global.js"></script>
 </head>
 <body>
+
+    <div id="navbar">
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+    </div>
 
     <div id="sidebar">
         <div id="sidebar-profile">
@@ -16,7 +25,7 @@
             <h3>Jonathan King</h3>
         </div>
 
-       <ul class=sidebarLinks>
+        <ul class=sidebarLinks>
             <li><a href="home"> <%= image_tag("homeIcon.png", id: "navbarImg") %> Home <%= image_tag("homeIcon.png", class: 'hiddenImg') %></a></li>
 
             <li><a href="profile"> <%= image_tag("profileIcon.png", id: "navbarImg") %> Profile <%= image_tag("profileIcon.png", class: 'hiddenImg') %></a></li>
@@ -34,13 +43,6 @@
 
         </ul>
 
-
-        <div id="sidebar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-
     </div>
 
 
@@ -51,20 +53,6 @@
     <div id="body-container">
         <h2>Graphs page</h2>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $('#sidebar-btn').click(function() {
-                $('#sidebar').toggleClass('visible');
-                $('#body-container').toggleClass('visible');
-                $('#navRect').toggleClass('visible');
-                $('.hiddenImg').toggle();
-            });
-        });
-
-
-
-    </script>
 
 
 </body>

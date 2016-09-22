@@ -3,12 +3,21 @@
 <head>
     <title>App Profile</title>
     <link rel="stylesheet" type="text/css" href="main.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>-->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="global.js"></script>
 </head>
 <body>
+
+    <div id="navbar">
+        <div id="sidebar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+    </div>
 
     <div id="sidebar">
         <div id="sidebar-profile">
@@ -33,12 +42,6 @@
 
         </ul>
 
-        <div id="sidebar-btn">
-        <span></span>
-        <span></span>
-        <span></span>
-        </div>
-
     </div>
 
 
@@ -51,12 +54,12 @@
             <h2>Profile</h2>
         </div>
         <div id="profilePic">
-            <img class="profilePic" id="user_pic">
+            <img class="profilePic" src="#">
         </div>
         <div id="socialMedia">
-            <h1 id = 'name_from_profile'></h1>
+            <h1>Jonathan King</h1>
             <ul class=socialMediaLinks>
-                <li><img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/facebook_circle_color-512.png"" id="socialMediaIcons"></li>
+                <li><img src="#" id="socialMediaIcons"></li>
                 <li><img src="#" id="socialMediaIcons"</li>
                 <li><img src="#" id="socialMediaIcons"</li>
             </ul>
@@ -65,7 +68,6 @@
         <div id="editInfo">
             <div class="panel-group">
                 <div class="panel panel-default">
-                <label id="result"></label>
 
 
 
@@ -111,38 +113,13 @@
             </div>
         </div>
     </div>
-
     <script>
-        $(document).ready(function(){
-            $('#sidebar-btn').click(function() {
-                $('#sidebar').toggleClass('visible');
-                $('#body-container').toggleClass('visible');
-                $('#navRect').toggleClass('visible');
-                $('.hiddenImg').toggle();
-            });
-             $('#panel1').click(function() {
-                $('.panel-title #expand1').toggleClass('glyphicon glyphicon-chevron-right glyphicon glyphicon-chevron-down');
-            });
-            $('#panel2').click(function() {
-                $('.panel-title #expand2').toggleClass('glyphicon glyphicon-chevron-right glyphicon glyphicon-chevron-down');
-            });
+        var profile = sessionStorage.getItem("profile");
+        var profile_obj = JSON.parse(profile);
 
-        });
-        var token = sessionStorage.getItem('idToken');
-
-        if (token) {
-
-            var profile = sessionStorage.getItem("profile");
-
-            document.getElementById("result").innerHTML = profile;
-            document.getElementById('user_pic').src = profile.picture;
-            document.getElementById("name_from_profile").innerHTML = profile.name;
-        }
-
-
-
+        document.getElementById("result").innerHTML = profile;
+        document.getElementById('user_pic').src = profile_obj.picture_large;
+        document.getElementById("name_from_profile").innerHTML = profile.name;
     </script>
-
-
 </body>
 </html>
