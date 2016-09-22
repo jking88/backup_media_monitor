@@ -11,7 +11,8 @@
 <script type="text/javascript">
   var lock = new Auth0Lock(
    'kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr',
-   'bretzsam.auth0.com'
+   'bretzsam.auth0.com',
+   'options'
    );
   lock.on("authenticated", function(authResult) {
     lock.getProfile(authResult.idToken, function(error, profile) {

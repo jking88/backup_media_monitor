@@ -5,9 +5,8 @@ class Auth0Controller < ApplicationController
     # id_token = session[:userinfo]['credentials']['id_token']
     # store the user profile in session and redirect to root
     session[:userinfo] = request.env['omniauth.auth']
-    @id_token = session[:userinfo]['credentials']['id_token']
 
-    redirect_to 'auth0/show'
+    redirect_to 'static_pages/manage'
   end
   def show
   end

@@ -6,7 +6,7 @@ class SecuredController < ApplicationController
   def logged_in_using_omniauth?
     unless session[:userinfo].present?
       # Redirect to page that has the login here
-      redirect_to '/manage'
+      redirect_to 'static_pages/manage'
     end
   end
 
