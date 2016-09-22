@@ -96,8 +96,9 @@
     <script>
         var lock = new Auth0Lock('kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr', 'bretzsam.auth0.com', {
             auth:{
-                redirectUrl: 'https://127.0.0.1:3000/home',
-                responseType: 'code',
+                redirect: true,
+                redirectUrl: 'https://45.55.129.215/home',
+                responseType: 'token',
                 sso: true
             }
         });
