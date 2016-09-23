@@ -18,12 +18,11 @@ class StaticPagesController < ApplicationController
 
 
   def home
+
     @first_url = Url.last.url
     puts(@first_url)
     @page = Nokogiri::HTML(open(@first_url))
     @data = @page.css("body")
-
-
 
   end
 
