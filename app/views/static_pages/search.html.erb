@@ -22,8 +22,8 @@
 
     <div id="sidebar">
         <div id="sidebar-profile">
-            <img class="sidebarPic" src="person.jpg">
-            <h3>Jonathan King</h3>
+            <img class="sidebarPic" id="user_pic">
+            <h3 id='name_from_profile'></h3>
         </div>
 
         <ul class=sidebarLinks>
@@ -55,6 +55,12 @@
         <h2>Search page</h2>
     </div>
 
+<script type="text/javascript">
+     var profile = localStorage.getItem("profile");
+     var profile_obj = JSON.parse(profile);
+     document.getElementById("user_pic").src = profile_obj.picture_large;
+     document.getElementById("name_from_profile").innerHTML = profile_obj.name;
 
+</script>
 </body>
 </html>

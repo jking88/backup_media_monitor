@@ -3,10 +3,9 @@ Rails.application.routes.draw do
 
   resources :urls
   resources :users
-  get 'auth0/callback'
 
 
-  root 'static_pages#home'
+  root 'static_pages#login_page'
 
   get 'auth0/failure'
   get 'static_pages/home' => 'static_pages#home'

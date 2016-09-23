@@ -6,7 +6,7 @@ class Auth0Controller < ApplicationController
     # store the user profile in session and redirect to root
     session[:userinfo] = request.env['omniauth.auth']
 
-    redirect_to 'static_pages/manage'
+    redirect_to '/home'
   end
   def show
   end

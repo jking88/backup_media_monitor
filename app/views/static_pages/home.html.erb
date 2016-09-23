@@ -11,6 +11,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
 
+
     <script src="global.js"></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
     <div id="sidebar">
         <div id="sidebar-profile">
             <img class="sidebarPic" id="user_pic">
-            <h3><p id='name_from_profile'></p></h3>
+            <h3 id='name_from_profile'></h3>
         </div>
 
 
@@ -93,31 +94,14 @@
         </div>
     </div>
 
-    <script>
-        var lock = new Auth0Lock('kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr', 'bretzsam.auth0.com', {
-            auth:{
-                redirect: true,
-                redirectUrl: 'https://45.55.129.215:3000/',
-                responseType: 'token',
-                sso: true
-            }
-        });
-          lock.on("authenticated", function(authResult) {
-            lock.getProfile(authResult.idToken, function(profile) {
-                alert('authenticated');
-                sessionStorage.setItem('idToken', authResult.idToken);
-                sessionStorage.setItem('profile', JSON.stringify(profile));
 
-            });
-          });
+<script type="text/javascript">
+     var profile = localStorage.getItem("profile");
+     var profile_obj = JSON.parse(profile);
+     document.getElementById("user_pic").src = profile_obj.picture_large;
+     document.getElementById("name_from_profile").innerHTML = profile_obj.name;
 
-        var profile = sessionStorage.getItem("profile");
-        var profile_obj = JSON.parse(profile);
-
-        document.getElementById("result").innerHTML = profile;
-        document.getElementById('user_pic').src = profile_obj.picture_large;
-        document.getElementById("name_from_profile").innerHTML = profile.name;
-    </script>
+</script>
 
 
 </body>
