@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'home' => 'static_pages#home'
 
   get 'graphs' => 'static_pages#graphs'
-  get 'login' => 'static_pages#login'
+  get 'login' => 'static_pages#login_page'
   get 'manage' => 'static_pages#manage'
   get 'home' => 'static_pages#home'
   get 'payment' => 'static_pages#payment'

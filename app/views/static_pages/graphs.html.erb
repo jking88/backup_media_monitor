@@ -55,7 +55,7 @@
         <h2>Graphs page</h2>
     </div>
 <script type="text/javascript">
-     var profile = localStorage.getItem("profile");
+     var profile = sessionStorage.getItem("profile");
      var profile_obj = JSON.parse(profile);
      document.getElementById("user_pic").src = profile_obj.picture_large;
      document.getElementById("name_from_profile").innerHTML = profile_obj.name;

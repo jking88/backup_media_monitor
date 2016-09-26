@@ -19,10 +19,24 @@ class StaticPagesController < ApplicationController
 
   def home
 
-    @first_url = Url.last.url
-    puts(@first_url)
-    @page = Nokogiri::HTML(open(@first_url))
-    @data = @page.css("body")
+    @title_arr = Array.new
+
+
+
+
+    @all_urls = Url.all
+
+
+
+    @url_arr = Array.new
+    @all_urls.each do |u|
+
+
+      @page = Nokogiri::HTML(open(u.url))
+      @url_arr.push(u.url)
+      @title_arr.push(@page.css('title').text)
+
+    end
 
   end
 
@@ -35,6 +49,24 @@ class StaticPagesController < ApplicationController
   end
 
   def manage
+   @title_arr = Array.new
+
+
+
+
+    @all_urls = Url.all
+
+    @url_arr = Array.new
+    @all_urls.each do |u|
+
+
+      @page = Nokogiri::HTML(open(u.url))
+      @url_arr.push(u)
+      @title_arr.push(@page.css('title').text)
+
+    end
+
+
   end
 
   def payment

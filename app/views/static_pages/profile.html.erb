@@ -104,7 +104,9 @@
                              <input type="passowrd" class="form-control" id="newPassword"</li>
                             <li class="list-group-item">Confirm Password:
                              <input type="passowrd" class="form-control" id="confirmPassword"</li>
+
                         </ul>
+                        <button onclick='saveChanges()'>Save Changes</button>
                     </div>
 
 
@@ -115,12 +117,14 @@
         </div>
     </div>
     <script type="text/javascript">
-     var profile = localStorage.getItem("profile");
+     var profile = sessionStorage.getItem("profile");
      var profile_obj = JSON.parse(profile);
      document.getElementById("prof_pic").src = profile_obj.picture_large;
      document.getElementById("user_pic").src = profile_obj.picture_large;
      document.getElementById("name_from_profile").innerHTML = profile_obj.name;
      document.getElementById("name").innerHTML = profile_obj.name;
+
+
 
 </script>
 </body>

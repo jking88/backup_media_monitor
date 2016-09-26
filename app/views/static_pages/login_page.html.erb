@@ -15,15 +15,15 @@
 
     // Listening for the authenticated event
     lock.on("authenticated", function(authResult) {
-      // Use the token in authResult to getProfile() and save it to localStorage
+      // Use the token in authResult to getProfile() and save it to sessionStorage
       lock.getProfile(authResult.idToken, function(error, profile) {
         document.getElementById('h4').style.display = "inline";
         document.getElementById('h6').style.display = "inline";
         document.getElementById('home_page_button').style.display = "inline";
 
-        localStorage.setItem('idToken', authResult.idToken);
-        localStorage.setItem('profile', JSON.stringify(profile));
-        var profile = localStorage.getItem("profile");
+        sessionStorage.setItem('idToken', authResult.idToken);
+        sessionStorage.setItem('profile', JSON.stringify(profile));
+        var profile = sessionStorage.getItem("profile");
         var profile_obj = JSON.parse(profile);
 
         document.getElementById("result").innerHTML = profile_obj.name;

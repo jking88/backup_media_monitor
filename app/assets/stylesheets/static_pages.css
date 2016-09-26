@@ -19,6 +19,16 @@ body {
 
 }
 
+.add_url_link {
+    padding-left: 5%;
+
+}
+
+.sign_out {
+    padding-left: 90%;
+    float: left;
+}
+
 #body-container {
     height: 95%;
     width: 97%;

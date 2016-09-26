@@ -61,11 +61,25 @@
             <div id="websiteName">
                 <div id="manageHeader">
                     <h4>Website Name</h4>
+                    <br></br>
+                    <ul>
+                    <%= @title_arr.each do |u| %>
+                        <div> <%= u %> </div>
+                    <% end -%>
+                    </ul>
                 </div>
             </div>
             <div id="websiteURL">
                  <div id="manageHeader">
                     <h4>Website URL</h4>
+                    <br></br>
+
+                    <ul>
+                    <%= @url_arr.each do |u| %>
+                        <li> <%= u. url%> </li>
+                    <% end -%>
+                    </ul>
+
                 </div>
             </div>
             <div id="overallMentions">
@@ -96,15 +110,25 @@
             <div id="actions">
                 <div id="manageHeader">
                     <h4>Actions</h4>
+                    <br></br>
+                    <%= @all_urls.each do |e| %>
+                        <button> <%= link_to "Edit Website Options", urls_path%> </button>
+                        <%= e.id %>
+                    <% end -%>
                 </div>
             </div>
         </div>
     </div>
 <script type="text/javascript">
-     var profile = localStorage.getItem("profile");
+     var profile = sessionStorage.getItem("profile");
      var profile_obj = JSON.parse(profile);
      document.getElementById("user_pic").src = profile_obj.picture_large;
      document.getElementById("name_from_profile").innerHTML = profile_obj.name;
+
+     // function editWebScrapeOptions(message, id) {
+
+
+     // }
 
 </script>
 
