@@ -1,4 +1,4 @@
-class UsersController < ApplicatiionController
+class UsersController < ApplicationController
   # before_action :logged_in_using_omniauth?
 
   # private
@@ -8,7 +8,7 @@ class UsersController < ApplicatiionController
   #     # Redirect to page that has the login here
   #     redirect_to '/'
   #   end
-  end
+  # end
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

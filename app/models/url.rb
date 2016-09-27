@@ -1,3 +1,4 @@
 class Url < ApplicationRecord
-    # @first_url = Url.last
+    belongs_to :user
+    has_many :keywords
 end
