@@ -4,48 +4,27 @@
     <title>Login Page</title>
 </head>
 <body>
-<h3>Login Here</h3>
 
-<script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
-<script type="text/javascript">
-        var lock = new Auth0Lock(
-  'kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr',
-  'bretzsam.auth0.com'
-);
+<h3>Continue to Home Page</h3>
 
-    // Listening for the authenticated event
-    lock.on("authenticated", function(authResult) {
-      // Use the token in authResult to getProfile() and save it to sessionStorage
-      lock.getProfile(authResult.idToken, function(error, profile) {
-        document.getElementById('h4').style.display = "inline";
-        document.getElementById('h6').style.display = "inline";
-        document.getElementById('home_page_button').style.display = "inline";
 
-        sessionStorage.setItem('idToken', authResult.idToken);
-        sessionStorage.setItem('profile', JSON.stringify(profile));
-        var profile = sessionStorage.getItem("profile");
-        var profile_obj = JSON.parse(profile);
+<%= link_to "Home Page", home_path %>
 
-        document.getElementById("result").innerHTML = profile_obj.name;
-        document.getElementById('user_pic').src = profile_obj.picture_large;
-        document.getElementById("name_from_profile").innerHTML = profile_obj.name;
-      });
-    });
-  // var lock = new Auth0Lock('kBzeIKEv2OtFoZXrRwTrF1MX8KeT38kr', 'bretzsam.auth0.com', {
-  //   auth: {
-  //     redirectUrl: 'http:127.0.0.1:3000/home',
-  //     responseType: 'code',
-  //     params: {
-  //       scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
-  //     }
-  //   }
-  // });
-</script>
-<button onclick="lock.show();">Login</button>
+<br></br>
 
-<h6 hidden id='h4'>You're signed in!</h6>
-<h4 hidden id='h6'>Continue to the home page below.</h4>
-<p id = "result">Profile info</p>
+<%= form_for(:session, url: login_path) do |f| %>
+
+    <%= f.label :email  %>
+    <%= f.email_field :email, class: "form-control" %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %>
+
+    <%= f.submit "Login", class: "btn-primary" %>
+<% end -%>
+
+<br></br>
+
 
 <div hidden id = "home_page_button"><%= link_to "Home Page", home_path %>
 </div>

@@ -1,14 +1,4 @@
 class UrlsController < ApplicationController
-  # before_action :logged_in_using_omniauth?
-
-  # private
-
-  # def logged_in_using_omniauth?
-  #   unless session[:userinfo].present?
-  #     # Redirect to page that has the login here
-  #     redirect_to '/'
-  #   end
-  # end
   before_action :set_url, only: [:show, :edit, :update, :destroy]
 
   # GET /urls

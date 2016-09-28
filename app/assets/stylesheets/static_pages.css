@@ -24,6 +24,10 @@ body {
 
 }
 
+.add_keyword {
+    padding-left: 5%;
+}
+
 .sign_out {
     padding-left: 90%;
     float: left;

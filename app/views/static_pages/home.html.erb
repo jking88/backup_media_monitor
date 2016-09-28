@@ -22,7 +22,9 @@
         <span></span>
         </div>
             <h1 class = "add_url_link"> <%= link_to "Add URL", urls_path%></h1>
+            <h2 class = "add_keyword"> <%= link_to "Add a Keyword to be Searched", keywords_path%></h2>
             <h1 class = "sign_out"> <%= link_to "Sign Out", login_path %></h1>
+
     </div>
 
     <div id="sidebar">
@@ -83,6 +85,8 @@
             <div id="liveFeed">
             <pre>
             <%= @title_arr.each { |e| e } %>
+
+
 
             </pre>
 

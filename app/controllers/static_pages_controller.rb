@@ -25,16 +25,16 @@ class StaticPagesController < ApplicationController
 
 
     @all_urls = Url.all
-
-
+    @css_selectors_arr = Keyword.all
 
     @url_arr = Array.new
     @all_urls.each do |u|
 
+    @page = Nokogiri::HTML(open(u.url))
+    @url_arr.push(u.url)
+    @title_arr.push(@page.css('title').text)
 
-      @page = Nokogiri::HTML(open(u.url))
-      @url_arr.push(u.url)
-      @title_arr.push(@page.css('title').text)
+
 
     end
 
