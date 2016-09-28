@@ -2,6 +2,8 @@
 
 one:
   keyword: MyString
+  url_id: 1
 
 two:
   keyword: MyString
+  url_id: 1

@@ -5,7 +5,7 @@ class UrlsController < ApplicationController
   # GET /urls
   # GET /urls.json
   def index
-    @urls = Url.all
+    @urls = Url.where(session[:user_id])
   end
 
   # GET /urls/1

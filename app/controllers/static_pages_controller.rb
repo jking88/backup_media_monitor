@@ -51,13 +51,11 @@ class StaticPagesController < ApplicationController
   def manage
    @title_arr = Array.new
 
-
-
-
     @all_urls = Url.all
 
     @url_arr = Array.new
     @all_urls.each do |u|
+
 
 
       @page = Nokogiri::HTML(open(u.url))
