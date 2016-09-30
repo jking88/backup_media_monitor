@@ -1,0 +1,28 @@
+<h1>Editing List</h1>
+
+<%= render 'form', list: @list %>
+
+
+<p>Add User</p>
+       <%= @list = params[:id] %>
+       <br>
+       <% @email_subscribers.each do |email_subscriber| %>
+
+         <% if @list == email_subscriber.list_name %>
+          <tr>
+            <td><%= email_subscriber.name %></td>
+            <td><%= email_subscriber.email %></td>
+            <td><%= link_to 'Delete User', email_subscriber, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          </tr>
+          <br>
+       <% end %>
+
+       <% end %>
+    <%= link_to 'New Email Subscriber', controller: 'email_subscribers', action: "new", id: @list %>
+
+
+<!-- add code for adding a user -->
+<br>
+<%= link_to 'Show', @list %> |
+<%= link_to 'Back', lists_path %>

@@ -79,6 +79,10 @@ class StaticPagesController < ApplicationController
   def settings
   end
 
+  def article_display
+  end
+
+
 
 
 

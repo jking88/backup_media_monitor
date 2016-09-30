@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :email_subscribers
+  resources :lists
   resources :keywords
   resources :urls
   resources :users
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
   get 'profile'           => 'static_pages#profile'
   get 'search'            => 'static_pages#search'
   get 'settings'          => 'static_pages#settings'
+  get 'article_display'   => 'static_pages#article_display'
 
   get 'new'               => 'user_url#new'
   post 'show'             => 'user_url#new'
