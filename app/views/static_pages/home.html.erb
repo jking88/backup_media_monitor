@@ -73,7 +73,7 @@
             </div>
             <div id="currentLinks">
             <pre>
-                <%= @all_urls.each do |u| %>
+                <% @all_urls.each do |u| %>
                     <%= u.url %>
                 <% end -%>
 
@@ -87,7 +87,7 @@
             </div>
             <div id="liveFeed">
             <pre>
-            <%= @title_arr.each { |e| e } %>
+            <% @title_arr.each { |e| e } %>
 
 
 

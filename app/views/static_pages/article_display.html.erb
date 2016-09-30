@@ -6,15 +6,45 @@
 <body>
 <div id = "body-container">
     <div id = "mainDisplay">
-        <h1>display section</h1>
+        <div id = "headDisplay">
+        <% @title_arr.each do |e| %>
+              <%=  e  %>
+        <% end -%>
+        </div>
+        <div id = "articleBody">
+            <% @body_arr.each do |e| %>
+              <%=  e  %>
+            <% end -%>
+        </div>
+        <div id = "articleImages">
+        <% @all_urls.each do |u| %>
+        <% Nokogiri::HTML(open(u.url)).xpath("//img/@src").each do |src| %>
+            <% uri = URI.join( u.url, src ).to_s %>
 
+            <img src=<%=uri%> style = "height: 100px; width: 100px;">
+        <%end%>
+    <%end%>
+        </div>
     </div>
     <div id = "sideTools">
         <div id = "emailList">
+            <div id="col-header">
+                <h3>Email List</h3>
 
+            </div>
+            <ul>
+            <% @lists.each do |list| %>
+                <li><label><input type="checkbox" value=<%= list.list_name %> ><%= list.list_name %></label></li>
+            <% end -%>
+            </ul>
         </div>
         <div id = "comments">
+            <div id="col-header">
+            <h3>Comments</h3>
 
+
+            </div>
+            <button>Add a Comment!</button>
         </div>
     </div>
 </div>

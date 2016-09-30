@@ -62,7 +62,7 @@ class StaticPagesController < ApplicationController
       @url_arr.push(u)
       @title_arr.push(@page.css('title').text)
 
-    end
+  end
 
 
   end
@@ -80,7 +80,26 @@ class StaticPagesController < ApplicationController
   end
 
   def article_display
+  @title_arr = Array.new
+  @body_arr = Array.new
+  @href_arr = Array.new
+  @all_urls = Url.all
+  @css_selectors_arr = Keyword.all
+  @lists = List.all
+
+
+  @all_urls.each do |u|
+
+    @page = Nokogiri::HTML(open(u.url))
+    @title_arr.push(@page.css('title').text)
+    @body_arr.push(@page.css('body').text)
+    Nokogiri::HTML(open(u.url)).xpath("//img/@src").each do |src|
+      uri = URI.join( u.url, src ).to_s
+      File.open(File.basename(uri),'wb') { |f| f.write(open(uri).read) }
+    end
+    end
   end
+
 
 
 
