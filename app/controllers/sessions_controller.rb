@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @user_email = session[:email]
   end
 
   def create

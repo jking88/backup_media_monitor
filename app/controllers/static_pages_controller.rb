@@ -18,10 +18,8 @@ class StaticPagesController < ApplicationController
 
 
   def home
-
     @title_arr = Array.new
-
-
+    @user = User.find_by id: session[:user_id]
 
 
     @all_urls = Url.all
@@ -80,12 +78,21 @@ class StaticPagesController < ApplicationController
   end
 
   def article_display
+
+
+  @user = User.find_by id: session[:user_id]
+
   @title_arr = Array.new
   @body_arr = Array.new
   @href_arr = Array.new
   @all_urls = Url.all
   @css_selectors_arr = Keyword.all
   @lists = List.all
+
+  @test_url = Url.first
+
+  @all_comments = Comment.order(:created_at)
+
 
 
   @all_urls.each do |u|

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  resources :comments
   resources :email_subscribers
   resources :lists
   resources :keywords

@@ -4,6 +4,7 @@
     <title>Article View</title>
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <div id = "body-container">
     <div id = "mainDisplay">
         <div id = "headDisplay">
@@ -42,13 +43,58 @@
             <div id="col-header">
             <h3>Comments</h3>
 
+            </div>
+
+            <div id="comments_section">
+                <ul id="comments_list">
+                    <% @all_comments.each do |c| %>
+                        <li><span id="commentUsername"><%= c.username %></span><br> <%= c.comment %><br> <%= c.created_at %> </li>
+                    <% end %>
+
+                </ul>
+            </div>
+            <div id = "comment_submit">
+
+                <%= form_for Comment.new do |f| %>
+
+                  <div hidden class="field">
+                    <%= f.label :username %>
+                    <%= f.text_field :username, required: true, value: @user.username %>
+                  </div>
+
+                  <div class="comment_in_form">
+                  <br>
+                    <%= f.label :comment %>
+                    <%= f.text_field :comment %>
+                  </div>
+
+                  <div hidden class="field">
+                    <%= f.label :url %>
+                    <%= f.text_field :url, required: true, value: @test_url.url %>
+                  </div>
+
+                  <div class="actions">
+                    <%= f.button :submit, name: "comment_text", value: "comment" %>
+                  </div>
+                <% end %>
 
             </div>
-            <button>Add a Comment!</button>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    var i = 0;
+    $(document).ready(function() {
 
+        $('body').on('click','#submit_comment', function() {
+        var comment_to_add = "<li id = 'comment'><span id='comment"+i+"'></span></li>";
+        $('#comments_list').append(comment_to_add);
+        var addText = $("#comment_text").val();
+        $("#comment" + i).text(addText);
+        i++;
+        });
+    });
+</script>
 
 </body>
 </html>
