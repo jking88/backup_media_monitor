@@ -32,12 +32,14 @@
             <div id="col-header">
                 <h3>Email List</h3>
 
+
             </div>
-            <ul>
+            <ul id = "email_lists">
             <% @lists.each do |list| %>
-                <li><label><input type="checkbox" value=<%= list.list_name %> ><%= list.list_name %></label></li>
+                <li><label><input id=<%= list.list_name %> type="checkbox" value=<%= list.list_name %> ><%= list.list_name %></label></li>
             <% end -%>
             </ul>
+            <input id="list_checkboxes" type="button" value="Email Blast"/>
         </div>
         <div id = "comments">
             <div id="col-header">
@@ -50,6 +52,7 @@
                     <% @all_comments.each do |c| %>
                         <li><span id="commentUsername"><%= c.username %></span><br> <%= c.comment %><br> <%= c.created_at %> </li>
                     <% end %>
+
 
                 </ul>
             </div>
@@ -83,18 +86,28 @@
     </div>
 </div>
 <script type="text/javascript">
-    var i = 0;
-    $(document).ready(function() {
+    alert('yo');
+    var list_arr = <%= raw @lists.to_json %>;
+    alert(list_arr.list_name);
+    var list_name_arr = [];
+    for(var i = 0; i < list_arr.length; i++) {
+        list_name_arr.push(list_arr[i]["list_name"]);
+        alert(list_name_arr[i]);
+    };
+    var checked_arr = [];
 
-        $('body').on('click','#submit_comment', function() {
-        var comment_to_add = "<li id = 'comment'><span id='comment"+i+"'></span></li>";
-        $('#comments_list').append(comment_to_add);
-        var addText = $("#comment_text").val();
-        $("#comment" + i).text(addText);
-        i++;
+    $(document).ready(function() {
+        alert('jquery');
+        $("body").on("click", "#list_checkboxes", function () {
+            for (var i = 0; i < list_name_arr.length; i++) {
+                if(document.getElementById(list_name_arr[i]).checked) {
+                    checked_arr.push(list_name_arr[i]);
+                    alert("checked " + list_name_arr[i])
+                };
+            };
         });
     });
 </script>
-
 </body>
+
 </html>
