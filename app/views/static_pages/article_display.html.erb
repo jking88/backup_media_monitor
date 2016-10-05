@@ -106,7 +106,7 @@
                 };
             };
 
-            checked_arr = JSON.stringify(checked_arr);
+            // checked_arr = JSON.stringify(checked_arr);
 
             $.ajax({
                 url: 'email_display',
@@ -115,10 +115,6 @@
                 data: { checked_arr },
 
                 success: function() {
-                    alert('success');
-                    alert(checked_arr);
-                    document.getElementById('checked_arr').innerHTML = checked_arr;
-                    // window.location.replace("http://localhost:3000/email_display")
 
                 }
             });

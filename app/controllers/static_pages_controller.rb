@@ -111,17 +111,17 @@ class StaticPagesController < ApplicationController
   end
 
   def article_display_email_list
+    @email_subs_per_list = Array.new
     if @checked_arr = params["checked_arr"]
-      redirect_to email_display_path(:id => @checked_arr)
+      @checked_arr.each do |list|
+        @email_subs_per_list.push(EmailSubscriber.where(list_name: list)).select(:field)
+      end
+      redirect_to email_display_path(:id => @email_subs_per_list)
     end
-  end
-
-  def email_display
-    @checked_arr = params["checked_arr"]
-    @checked_arr_permanent = @checked_arr
-
 
   end
+
+
 
 
 

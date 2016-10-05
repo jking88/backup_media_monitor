@@ -5,14 +5,19 @@
 </head>
 <h1>Successful Redirect</h1>
 <body>
-<%# @checked_arr.each do |list| %>
-<%#= list.inspect %>
- <%# end %>
-</body>
-<p>hey</p>
-<%= params[:id] %>
-<script>
-alert(@checked_arr_permanent);
 
-</script>
+ <div hidden>
+<% @temp = params[:id] %>
+ </div>
+<% @email_subs_per_list = @temp %>
+<% @email_subs_per_list.inspect %>
+<br>
+<br>
+
+
+
+<%= link_to 'Article Display', article_display_path %>
+
+</body>
+
 </html>
