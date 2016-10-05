@@ -39,7 +39,12 @@
                 <li><label><input id=<%= list.list_name %> type="checkbox" value=<%= list.list_name %> ><%= list.list_name %></label></li>
             <% end -%>
             </ul>
+
+
             <input id="list_checkboxes" type="button" value="Email Blast"/>
+            <label id = 'checked_arr'></label>
+
+
         </div>
         <div id = "comments">
             <div id="col-header">
@@ -86,27 +91,42 @@
     </div>
 </div>
 <script type="text/javascript">
-    alert('yo');
     var list_arr = <%= raw @lists.to_json %>;
-    alert(list_arr.list_name);
     var list_name_arr = [];
     for(var i = 0; i < list_arr.length; i++) {
         list_name_arr.push(list_arr[i]["list_name"]);
-        alert(list_name_arr[i]);
     };
     var checked_arr = [];
-
+    <%= @checked_arr %>
     $(document).ready(function() {
-        alert('jquery');
         $("body").on("click", "#list_checkboxes", function () {
             for (var i = 0; i < list_name_arr.length; i++) {
                 if(document.getElementById(list_name_arr[i]).checked) {
                     checked_arr.push(list_name_arr[i]);
-                    alert("checked " + list_name_arr[i])
                 };
             };
+
+            checked_arr = JSON.stringify(checked_arr);
+
+            $.ajax({
+                url: 'email_display',
+                type: 'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: { checked_arr },
+
+                success: function() {
+                    alert('success');
+                    alert(checked_arr);
+                    document.getElementById('checked_arr').innerHTML = checked_arr;
+                    // window.location.replace("http://localhost:3000/email_display")
+
+                }
+            });
+
+
         });
     });
+
 </script>
 </body>
 

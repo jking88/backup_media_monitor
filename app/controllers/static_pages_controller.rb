@@ -2,6 +2,7 @@ require 'rubygems'
 require 'nokogiri'
 require 'open-uri'
 class StaticPagesController < ApplicationController
+  #skip_before_action :verify_authenticity_token
   # before_action :logged_in_using_omniauth?
 
   # private
@@ -66,6 +67,7 @@ class StaticPagesController < ApplicationController
   end
 
   def payment
+
   end
 
   def profile
@@ -79,6 +81,7 @@ class StaticPagesController < ApplicationController
 
   def article_display
 
+  @checked_boxes = params[:list_name_ids]
 
   @user = User.find_by id: session[:user_id]
 
@@ -105,6 +108,19 @@ class StaticPagesController < ApplicationController
       File.open(File.basename(uri),'wb') { |f| f.write(open(uri).read) }
     end
     end
+  end
+
+  def article_display_email_list
+    if @checked_arr = params["checked_arr"]
+      redirect_to email_display_path(:id => @checked_arr)
+    end
+  end
+
+  def email_display
+    @checked_arr = params["checked_arr"]
+    @checked_arr_permanent = @checked_arr
+
+
   end
 
 
