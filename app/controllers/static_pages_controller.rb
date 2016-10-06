@@ -121,12 +121,12 @@ class StaticPagesController < ApplicationController
     end
 
       redirect_to email_display_path(:id => @email_subs_per_list)
-    end
+  end
 
-  # def email_display
-  #   @file = render_to_string :template => 'notifier_mailer/notify.html.erb'
+  def email_display
+    @file = render_to_string :template => 'notifier_mailer/notify.html.erb'
 
-  # end
+  end
 
 
 
