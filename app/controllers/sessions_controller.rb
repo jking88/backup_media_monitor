@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
 
         remember user
-        redirect_to '/home'
+        redirect_to '/article_display'
     else
         #create error message
         flash[:danger] = 'Invalid email/password combination!'

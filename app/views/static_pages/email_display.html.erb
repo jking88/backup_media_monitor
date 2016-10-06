@@ -6,18 +6,50 @@
 <h1>Successful Redirect</h1>
 <body>
 
+
  <div hidden>
 <% @temp = params[:id] %>
  </div>
 <% @email_subs_per_list = @temp %>
-<% @email_subs_per_list.inspect %>
 <br>
 <br>
+<h3>Edit the following template email to send to your subscribers. </h3>
+<div id = "includeDisplay"></div>
+<%= @file.html_safe %>
+<br>
+<br>
+<br>
+<h3>Send Email to the following addresses?</h3>
+<% @email_subs_per_list.each do |sub| %>
+    <%= sub.inspect %>
+    <br>
+<% end %>
+<br>
 
 
-
+<input type="button" id="send_via_ajax" value="Send Mail!"/>
 <%= link_to 'Article Display', article_display_path %>
 
+
+<script type="text/javascript">
+    var send_to_emails = <%= raw @email_subs_per_list %>;
+    $(document).ready(function() {
+        $("body").on("click", "#send_via_ajax", function() {
+            $.ajax({
+                url: 'sent_mail_review',
+                type: 'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: { send_to_emails },
+                success: function() {
+                    alert("sent!");
+                }
+
+            })
+        })
+    })
+
+
+</script>
 </body>
 
 </html>

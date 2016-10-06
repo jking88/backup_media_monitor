@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div hidden>
+<%= @temp = params[:id] %>
+<%= @sent_to = @temp %>
+</div>
+<h3>Sent Mail:</h3>
+<% @sent_to.each do |sent| %>
+    <%= sent.inspect %>
+<% end %>
+<h4>Opened:</h4>
+<h4>Unopened:</h4>
+
+</body>
+</html>

@@ -1,8 +1,7 @@
 class NotifierMailer < ApplicationMailer
 
-    def notify(user)
-        @user = user
-        mail(to: @user.email, subject: "Welcome!")
+    def notify(email)
+        mail(to: email, subject: "Welcome!")
     end
 
 

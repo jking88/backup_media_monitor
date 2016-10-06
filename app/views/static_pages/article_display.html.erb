@@ -97,25 +97,27 @@
         list_name_arr.push(list_arr[i]["list_name"]);
     };
     var checked_arr = [];
-    <%= @checked_arr %>
-    $(document).ready(function() {
+    alert(list_arr.length);
+    alert(list_name_arr.length);
+        $(document).ready(function() {
         $("body").on("click", "#list_checkboxes", function () {
             for (var i = 0; i < list_name_arr.length; i++) {
                 if(document.getElementById(list_name_arr[i]).checked) {
                     checked_arr.push(list_name_arr[i]);
+                    alert('in if');
                 };
             };
+                alert('yo');
 
-            // checked_arr = JSON.stringify(checked_arr);
-
+            alert('before ajax');
             $.ajax({
-                url: 'email_display',
+                url: '/email_display',
                 type: 'POST',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 data: { checked_arr },
 
                 success: function() {
-
+                    alert('ajax sent');
                 }
             });
 

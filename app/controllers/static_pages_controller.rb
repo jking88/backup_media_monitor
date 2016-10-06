@@ -83,23 +83,23 @@ class StaticPagesController < ApplicationController
 
   @checked_boxes = params[:list_name_ids]
 
-  @user = User.find_by id: session[:user_id]
 
   @title_arr = Array.new
   @body_arr = Array.new
   @href_arr = Array.new
-  @all_urls = Url.all
-  @css_selectors_arr = Keyword.all
-  @lists = List.all
 
+  @user = User.find_by id: session[:user_id]
+
+  @all_urls = Url.all
   @test_url = Url.first
+
+  @css_selectors_arr = Keyword.all
+
+  @lists = List.all
 
   @all_comments = Comment.order(:created_at)
 
-
-
   @all_urls.each do |u|
-
     @page = Nokogiri::HTML(open(u.url))
     @title_arr.push(@page.css('title').text)
     @body_arr.push(@page.css('body').text)
@@ -114,19 +114,40 @@ class StaticPagesController < ApplicationController
     @email_subs_per_list = Array.new
     if @checked_arr = params["checked_arr"]
       @checked_arr.each do |list|
-        @email_subs_per_list.push(EmailSubscriber.where(list_name: list)).select(:field)
+        EmailSubscriber.where(list_name: list).find_each do |subscriber|
+          @email_subs_per_list.push(subscriber.email)
+        end
       end
+    end
+
       redirect_to email_display_path(:id => @email_subs_per_list)
+    end
+
+  # def email_display
+  #   @file = render_to_string :template => 'notifier_mailer/notify.html.erb'
+
+  # end
+
+
+
+  def sent_mail_review
+    if @send_to_arr = params["send_to_emails"]
+      @send_to_arr.each do |sub|
+        NotifierMailer.notify(sub).deliver
+      end
+      redirect_to sent_mail_review_path(:id => @send_to_arr)
     end
 
   end
 
 
 
-
-
-
-
-
-
 end
+
+
+
+
+
+
+
+
