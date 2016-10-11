@@ -659,12 +659,14 @@ Actions Section (Edit, Remove)
     width: 100%;
     height: 63%;
     border-style: solid;
+    overflow-y: scroll;
 }
 
 #articleImages {
     width: 100%;
     height: 20%;
     border-style: solid;
+    overflow-y: scroll;
 
 }
 
@@ -713,9 +715,40 @@ Actions Section (Edit, Remove)
     color: blue;
 }
 
+#search_container {
+    height: 75%;
+}
+
+#search_side_bar_list_view {
+    border-style: solid;
+    float: left;
+    width: 10%;
+    height: 100%;
+
+}
+
+#search_list_view {
+    border-style: solid;
+    height: 6%;
+    width: 99.3%;
+
+}
 
 
+#articles_list_view {
+    border-style: solid;
+    float: left;
+    height: 100%;
+    width: 20%;
 
+}
+
+#articles_filtered_list_view {
+    border-style: solid;
+    float: left;
+    height: 100%;
+    width: 69%;
+}
 
 
 

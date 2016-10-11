@@ -8,19 +8,34 @@
 <div id = "body-container">
     <div id = "mainDisplay">
         <div id = "headDisplay">
-        <% @title_arr.each do |e| %>
-              <%=  e  %>
+        <% @article_arr = params[:checked_arr] %>
+        <% @article_arr.each do |e| %>
+            <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
+            <% @body = Nokogiri::HTML(@response.body) %>
+            <%= @select = @body.xpath('//title') %>
+            <br>
         <% end -%>
         </div>
         <div id = "articleBody">
-            <% @body_arr.each do |e| %>
-              <%=  e  %>
+            <% @article_arr.each do |e| %>
+            <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
+            <% @body = Nokogiri::HTML(@response.body) %>
+            <% @select_text = @body.xpath('//a/@href') %>
+            <% @select_text.each do |href| %>
+                <%= href %>
+                <br>
+                <% end %>
+            <br>
             <% end -%>
+
         </div>
         <div id = "articleImages">
-        <% @all_urls.each do |u| %>
-        <% Nokogiri::HTML(open(u.url)).xpath("//img/@src").each do |src| %>
-            <% uri = URI.join( u.url, src ).to_s %>
+        <% @article_arr.each do |u| %>
+
+            <% @response = Typhoeus.get(u, ssl_verifyhost: 0)%>
+            <% @body = Nokogiri::HTML(@response.body) %>
+            <% @body.xpath("//img/@src").each do |src| %>
+             <% uri = URI.join( u, src ).to_s %>
 
             <img src=<%=uri%> style = "height: 100px; width: 100px;">
         <%end%>
@@ -97,17 +112,14 @@
         list_name_arr.push(list_arr[i]["list_name"]);
     };
     var checked_arr = [];
-    alert(list_arr.length);
-    alert(list_name_arr.length);
+
         $(document).ready(function() {
         $("body").on("click", "#list_checkboxes", function () {
             for (var i = 0; i < list_name_arr.length; i++) {
                 if(document.getElementById(list_name_arr[i]).checked) {
                     checked_arr.push(list_name_arr[i]);
-                    alert('in if');
                 };
             };
-                alert('yo');
 
             alert('before ajax');
             $.ajax({
@@ -117,7 +129,7 @@
                 data: { checked_arr },
 
                 success: function() {
-                    alert('ajax sent');
+                    alert('success');
                 }
             });
 

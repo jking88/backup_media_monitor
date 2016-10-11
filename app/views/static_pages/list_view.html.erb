@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h3>Articles:</h3>
+    <div id="search_list_view">
+    <input id='search_text' type="search_text" name="Search Articles">
+    <button id="search_button">Add search criterion</button><br>
+    <button id="to_article_view">View/Edit Articles</button>
+    <%= button_to "Add Articles", new_url_path  %>
+
+
+</div>
+<div id="search_container">
+    <div id="search_side_bar_list_view">
+
+    </div>
+    <div id="articles_list_view">
+    <% @urls.each do |u| %>
+    <label><input id=<%= u.url %> type="checkbox" value=<%= u.url %> ><%= u.url %></label>
+    <%end%>
+    </div>
+    <div id="articles_filtered_list_view">
+
+
+    </div>
+</div>
+<script type="text/javascript">
+var url_list_arr = <%= raw @urls.to_json %>;
+    var url_name_arr = [];
+    for(var i = 0; i < url_list_arr.length; i++) {
+        url_name_arr.push(url_list_arr[i]["url"]);
+    };
+    var checked_arr = [];
+
+        $(document).ready(function() {
+        $("body").on("click", "#to_article_view", function () {
+            var keyword = document.getElementById("search_text").value;
+            alert(keyword);
+            for (var i = 0; i < url_name_arr.length; i++) {
+                if(document.getElementById(url_name_arr[i]).checked) {
+                    alert("added" + url_name_arr[i]);
+                    checked_arr.push(url_name_arr[i]);
+                };
+            };
+
+            alert('before ajax');
+            $.ajax({
+                url: '/filtered_view',
+                type: 'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: { checked_arr, keyword },
+
+                success: function() {
+                    alert('success');
+                }
+            })
+    });
+});
+
+</script>
+</body>
+</html>

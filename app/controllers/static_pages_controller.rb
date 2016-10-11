@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'typhoeus'
 require 'nokogiri'
 require 'open-uri'
 class StaticPagesController < ApplicationController
@@ -82,6 +83,7 @@ class StaticPagesController < ApplicationController
   def article_display
 
   @checked_boxes = params[:list_name_ids]
+  @all_comments = Comment.order(:created_at)
 
 
   @title_arr = Array.new
@@ -92,22 +94,24 @@ class StaticPagesController < ApplicationController
 
   @all_urls = Url.all
   @test_url = Url.first
-
   @css_selectors_arr = Keyword.all
-
   @lists = List.all
 
-  @all_comments = Comment.order(:created_at)
+  if @article_arr = params["article_arr"]
+    redirect_to article_display_path(:checked_arr => @article_arr)
+  end
+  # @article_arr = params["checked_arr"]
 
-  @all_urls.each do |u|
-    @page = Nokogiri::HTML(open(u.url))
-    @title_arr.push(@page.css('title').text)
-    @body_arr.push(@page.css('body').text)
-    Nokogiri::HTML(open(u.url)).xpath("//img/@src").each do |src|
-      uri = URI.join( u.url, src ).to_s
-      File.open(File.basename(uri),'wb') { |f| f.write(open(uri).read) }
-    end
-    end
+  # @article_arr.each do |u|
+  #   @doc = Typhoeus.get(u)
+  #   @page = Nokogiri::HTML(@doc.body)
+  #   @title_arr.push(@page.css('title').text)
+  #   @body_arr.push(@page.css('#body').text)
+  #   @page.xpath("//img/@src").each do |src|
+  #     uri = URI.join( u, src ).to_s
+  #     File.open(File.basename(uri),'wb') { |f| f.write(open(uri).read) }
+  #   end
+  #   end
   end
 
   def article_display_email_list
@@ -141,6 +145,25 @@ class StaticPagesController < ApplicationController
   end
 
 
+  def list_view
+    @urls = Url.all
+    if @article_arr = params["checked_arr"]
+      redirect_to filtered_view_path(:article_arr => @article_arr, :keyword => @keyword)
+    end
+    if @checked_arr = params["id"]
+      @checked_urls = @checked_arr
+    end
+
+  end
+
+  def filtered_view
+    if @checked_urls = params["checked_arr"]
+      if @keyword = params["keyword"]
+        redirect_to filtered_view_path(:checked_urls => @checked_urls, :keyword => @keyword)
+      end
+    end
+
+  end
 
 end
 

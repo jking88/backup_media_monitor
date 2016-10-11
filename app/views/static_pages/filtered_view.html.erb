@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filtered View</title>
+</head>
+<body>
+<h2>Articles that matched your search results:</h2>
+<% @r1 = Regexp.new(params[:keyword]) %>
+<% @checked_urls = params[:checked_urls] %>
+<div id="checked_list">
+ <% @checked_urls.each do |u| %>
+    <% u %>
+    <br>
+ <% end %>
+<h2>Select which articles to view:</h2>
+
+ <% @checked_urls.each do |e| %>
+    <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
+    <% @body = Nokogiri::HTML(@response.body) %>
+    <% @select_text = @body.xpath("//a/@href") %>
+    <% @articles_return = Array.new %>
+    <% @select_text.each do |href| %>
+        <% if (/http/ =~ href) != nil %>
+            <% if ( @r1 =~ href) != nil %>
+                <% @articles_return.push(href.to_s) %>
+            <% end %>
+        <% end %>
+    <% end %>
+    <br>
+    <% @articles_uniq = @articles_return.uniq %>
+    <% @articles_uniq.each do |article| %>
+    <label><input id=<%= article %> type="checkbox" value=<%= article %> ><%= article %></label>
+    <% end %>
+<% end %>
+
+<button id="send_to_article_display">Display Articles</button>
+
+ </div>
+ <script type="text/javascript">
+    var articles_list_arr = <%= raw @articles_uniq.to_json %>;
+    var articles_name_arr = [];
+    for(var i = 0; i < articles_list_arr.length; i++) {
+        articles_name_arr.push(articles_list_arr[i]);
+    };
+    var article_arr = [];
+    alert(articles_name_arr);
+
+        $(document).ready(function() {
+        $("body").on("click", "#send_to_article_display", function () {
+
+            for (var i = 0; i < articles_name_arr.length; i++) {
+                if(document.getElementById(articles_name_arr[i]).checked) {
+                    alert("added" + articles_name_arr[i]);
+                    article_arr.push(articles_name_arr[i]);
+                };
+            };
+
+            alert('before ajax');
+            $.ajax({
+                url: '/article_display',
+                type: 'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: { article_arr },
+
+                success: function() {
+                    alert('success');
+                }
+            })
+    });
+});
+
+</script>
+</body>
+</html>
