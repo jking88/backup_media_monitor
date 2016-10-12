@@ -2,6 +2,8 @@ require 'rubygems'
 require 'typhoeus'
 require 'nokogiri'
 require 'open-uri'
+require 'net/http'
+require 'mechanize'
 class StaticPagesController < ApplicationController
   #skip_before_action :verify_authenticity_token
   # before_action :logged_in_using_omniauth?

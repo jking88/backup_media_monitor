@@ -14,6 +14,9 @@
  <% end %>
 <h2>Select which articles to view:</h2>
 
+
+
+
 <% @articles_return = Array.new %>
 <% @checked_urls.each do |e| %>
     <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
@@ -41,7 +44,9 @@
         <% @flag = false %>
     <% end %>
     <% if @flag %>
-        <label><input id=<%= article %> type="checkbox" value=<%= article%> ><%= @titles.last %></label>
+        <% @response = Faraday.head(article) %>
+        <% @last = @response['Last-Modified'] %>
+        <label><input id=<%= article %> type="checkbox" value=<%= article%> ><%= @titles.last %> <%= @last %></label>
     <% end %>
 <% end %>
 
@@ -65,7 +70,7 @@
         $("body").on("click", "#send_to_article_display", function () {
 
             for (var i = 0; i < articles_name_arr.length; i++) {
-                if(document.getElementById(articles_name_arr[i]).checked) {
+                if (document.getElementById(articles_name_arr[i]).checked) {
                     alert("added" + articles_name_arr[i]);
                     article_arr.push(articles_name_arr[i]);
                 };
