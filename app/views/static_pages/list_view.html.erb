@@ -38,7 +38,6 @@ var url_list_arr = <%= raw @urls.to_json %>;
         $(document).ready(function() {
         $("body").on("click", "#to_article_view", function () {
             var keyword = document.getElementById("search_text").value;
-            alert(keyword);
             for (var i = 0; i < url_name_arr.length; i++) {
                 if(document.getElementById(url_name_arr[i]).checked) {
                     alert("added" + url_name_arr[i]);
@@ -46,7 +45,6 @@ var url_list_arr = <%= raw @urls.to_json %>;
                 };
             };
 
-            alert('before ajax');
             $.ajax({
                 url: '/filtered_view',
                 type: 'POST',
