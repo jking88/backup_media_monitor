@@ -7,6 +7,7 @@
 <p>Add User</p>
        <%= @list = params[:id] %>
        <br>
+       <% if @email_subscribers %>
        <% @email_subscribers.each do |email_subscriber| %>
 
          <% if @list == email_subscriber.list_name %>
@@ -18,7 +19,7 @@
           </tr>
           <br>
        <% end %>
-
+       <% end %>
        <% end %>
     <%= link_to 'New Email Subscriber', controller: 'email_subscribers', action: "new", id: @list %>
 
