@@ -30,14 +30,19 @@
     <% end %>
 <% end %>
 <% @articles_uniq = @articles_return.uniq %>
+<% @titles = Array.new %>
 <% @articles_uniq.each do |article| %>
-    <% @response = Typhoeus.get(article, ssl_verifyhost: 0) %>
-    <% @body = Nokogiri::HTML(@response.body) %>
-    <% @select_text = @body.xpath("//title").inner_text %>
-
-
-    <label><input id=<%= article %> type="checkbox" value=<%= article %> ><%= article %></label>
-
+    <% @response_articles = Typhoeus.get(article, ssl_verifyhost: 0) %>
+    <% @body_article = Nokogiri::HTML(@response_articles.body) %>
+    <% if (@titles.include? @body_article.xpath("//title").inner_text) == false %>
+        <% @flag = true %>
+        <% @titles.push(@body_article.xpath("//title").inner_text) %>
+    <% else %>
+        <% @flag = false %>
+    <% end %>
+    <% if @flag %>
+        <label><input id=<%= article %> type="checkbox" value=<%= article%> ><%= @titles.last %></label>
+    <% end %>
 <% end %>
 
 
