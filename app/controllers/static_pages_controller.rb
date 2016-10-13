@@ -5,17 +5,6 @@ require 'open-uri'
 require 'net/http'
 require 'mechanize'
 class StaticPagesController < ApplicationController
-  #skip_before_action :verify_authenticity_token
-  # before_action :logged_in_using_omniauth?
-
-  # private
-
-  # def logged_in_using_omniauth?
-  #   unless session[:userinfo].present?
-  #     # Redirect to page that has the login here
-  #     redirect_to '/manage'
-  #   end
-  # end
 
   def login_page
   end
@@ -149,12 +138,71 @@ class StaticPagesController < ApplicationController
 
   def list_view
     @urls = Url.all
-    if @article_arr = params["checked_arr"]
-      redirect_to filtered_view_path(:article_arr => @article_arr, :keyword => @keyword)
+
+    if @parent = params["checked_arr"] #all of the checkmarked parent websites
+    @titles = Array.new
+    @filted_articles = Array.new
+    @articles_return = Array.new #array for all of the filtered urls to be added to
+    @all_child_data = Array.new #array  that contains a hash of data for each child
+        if @keyword = params["keyword"]
+          @r1 = Regexp.new(@keyword.downcase) #create regular exp
+        end
+        @parent.each do |e|
+          @response = Typhoeus.get(e, ssl_verifyhost: 0)
+          @body = Nokogiri::HTML(@response.body)
+          @select_text = @body.xpath("//a/@href")   #Grabs all href's within a tags within url
+          @select_text.each do |href|
+             if (/http/ =~ href) != nil    # If it contains http
+                  if (/.jpg/ =~ href) == nil && (/.png/ =~ href) == nil  # If it doesn't contain .jpg or .png
+                    @response = Typhoeus.get(href, ssl_verifyhost: 0)  # makes a request to the href http tag within url
+                    @child_body = Nokogiri::HTML(@response.body)  # gets the body of the url
+                    @all_p_tags = @child_body.xpath("//body/p").to_s
+                    if (@r1 =~ @all_p_tags) != nil
+                        #create hash for child
+                        @title = @child_body.xpath("//title").to_s
+                        @child_url = href
+                        @date_response = Faraday.head(href)
+                        @temp = @date_response['Last-Modified']
+                        if @temp.present?
+                          @child_date = @temp
+                        end
+                        @hash = {:title => @title, :body => @all_p_tags, :url => @child_url, :date => @child_date.to_s}
+                        @all_child_data.push(@hash)
+                    end
+                  end
+             end
+          end
+        end
+        flash[:notice] = "Hi"
+        redirect_to list_view_path(:child => @all_child_data)
     end
-    if @checked_arr = params["id"]
-      @checked_urls = @checked_arr
-    end
+
+
+
+
+    #  @articles_uniq = @articles_return.uniq
+    #  @articles_uniq.each do |article|
+    #      @response_articles = Typhoeus.get(article, ssl_verifyhost: 0)
+    #      @body_article = Nokogiri::HTML(@response_articles.body)
+    #      if (@titles.include? @body_article.xpath("//title").inner_text) == false
+    #          @flag = true
+    #          @titles.push(@body_article.xpath("//title").inner_text)
+    #      else
+    #          @flag = false
+    #      end
+    #      if @flag
+    #          @response = Faraday.head(article)
+    #          @date = @response['Last-Modified']
+    #          if @date.present?
+    #             @filted_articles.push(article)
+    #          end
+    #      end
+    #   end
+    #   redirect_to list_view_path(:filted_articles => @filted_articles)
+    # end
+
+
+
 
   end
 
@@ -168,11 +216,6 @@ class StaticPagesController < ApplicationController
   end
 
 end
-
-
-
-
-
 
 
 

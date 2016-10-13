@@ -22,7 +22,11 @@
     <%end%>
     </div>
     <div id="articles_filtered_list_view">
-
+    <% if flash[:notice] %>
+        <% @all_child_data = params[:child_data] %>
+        <%= @all_child_data.inspect %>
+        <p>work plz</p>
+    <% end %>
 
     </div>
 </div>
@@ -45,8 +49,8 @@ var url_list_arr = <%= raw @urls.to_json %>;
             };
 
             $.ajax({
-                url: '/filtered_view',
-                type: 'POST',
+                url: '/list_view',
+                type: 'GET',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 data: { checked_arr, keyword },
 
