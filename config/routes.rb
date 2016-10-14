@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   post 'sent_mail_review'          => 'static_pages#sent_mail_review'
   get 'sent_mail_review'           => 'static_pages#sent_mail_review'
   get 'list_view'                  => 'static_pages#list_view'
+  post 'list_view'                 => 'static_pages#list_view_helper'
   get 'filtered_view'              => 'static_pages#filtered_view'
   post 'filtered_view'             => 'static_pages#filtered_view'
 

@@ -22,11 +22,16 @@
     <%end%>
     </div>
     <div id="articles_filtered_list_view">
-    <% if flash[:notice] %>
-        <% @all_child_data = params[:child_data] %>
-        <%= @all_child_data.inspect %>
-        <p>work plz</p>
+
+    <% if @all_child_data = params[:child_data] %>
+        <%= @all_child_data[0][:title] %>
+        <p>made it</p>
     <% end %>
+
+   <ul id= "child_list">
+
+   </ul>
+
 
     </div>
 </div>
@@ -50,14 +55,37 @@ var url_list_arr = <%= raw @urls.to_json %>;
 
             $.ajax({
                 url: '/list_view',
-                type: 'GET',
+                type: 'POST',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 data: { checked_arr, keyword },
 
                 success: function() {
                     alert('success');
+                    window.location.reload();
+                    alert('reloaded');
+                    var all_child_data = <%= raw @all_child_data.to_json %>;
+                    var parent = <%= raw @parent.to_json %>;
+                    var p_tags = <%= raw @all_p_tags.to_json %>;
+
+                    alert(all_child_data);
+                    alert(parent);
+                    alert(p_tags);
+                    // var ul = document.getElementById("list");
+                    // for (int i = 0; i < all_child_data.length; i++) {
+                    //     var li = document.createElement("li");
+                    //     li.appendChild(document.createTextNode(all_child_data[i]));
+                    //     ul.appendChild(li);
+                    // }
+
                 }
             })
+
+            // $.ajax({
+            //     url: '/list_view'
+            //     type: 'GET',
+            //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            //     data: {  }
+            // })
     });
 });
 
