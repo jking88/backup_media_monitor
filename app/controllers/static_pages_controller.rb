@@ -169,6 +169,16 @@ class StaticPagesController < ApplicationController
 
 
   def list_view_helper
+
+    def self.replace_invalid_characters(str)
+      for i in (0...str.size)
+        if !str[i].valid_encoding?
+          str[i]="?"
+        end
+      end
+    end
+
+
     if @parent = params["checked_arr"] #all of the checkmarked parent websites
     @titles = Array.new
     @filted_articles = Array.new
@@ -186,27 +196,30 @@ class StaticPagesController < ApplicationController
              if (/http/ =~ href) != nil    # If it contains http
                   if (/.jpg/ =~ href) == nil && (/.png/ =~ href) == nil  # If it doesn't contain .jpg or .png
                     @response = Typhoeus.get(href, ssl_verifyhost: 0)  # makes a request to the href http tag within url
-                    @child_body = Nokogiri::HTML(@response.body)  # gets the html of the url
-                    @all_p_tags = @child_body.xpath("//body//p").to_s
-                    @all_p_tags.encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-                    @encoding  = @all_p_tags.encoding
-                    if (@r1 =~ @all_p_tags) != nil
-                        #create hash for child
-                        @title = @child_body.xpath("//title").inner_html
-                        @child_url = href
-                        @date_response = Faraday.head(href)
-                        @temp = @date_response['Last-Modified']
-                        if @temp.present?
-                          @child_date = @temp
-                        end
-                        @hash = {:title => @title, :body => @all_p_tags, :url => @child_url, :date => @child_date.to_s}
-                        @all_child_data.push(@hash)
-                    end
-                  end
+                      @child_body = Nokogiri::HTML(@response.body)  # gets the html of the url
+                      @all_p_tags = @child_body.xpath("//body//p").to_s
+                      @all_p_tags.force_encoding(Encoding::UTF_8)
+                      if !@all_p_tags.valid_encoding?
+                        replace_invalid_characters(@all_p_tags)
+                      end
+
+                      # if (@r1 =~ @all_p_tags) != nil
+                          #create hash for child
+                          @title = @child_body.xpath("//title").inner_html
+                          @child_url = href
+                          @date_response = Faraday.head(href)
+                          @temp = @date_response['Last-Modified']
+                          if @temp.present?
+                            @child_date = @temp
+                          end
+                          @hash = {:title => @title, :body => @all_p_tags, :url => @child_url, :date => @child_date.to_s}
+                          @all_child_data.push(@hash)
+                    # end
+                   end
              end
           end
         end
-        redirect_to list_view_path(:child_data => @all_child_data)
+        redirect_to list_view_path
     end
 
 

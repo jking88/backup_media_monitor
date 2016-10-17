@@ -23,7 +23,7 @@
     </div>
     <div id="articles_filtered_list_view">
 
-    <% if @all_child_data = params[:child_data] %>
+    <% if @all_child_data = session[:all_child_data] %>
         <%= @all_child_data[0][:title] %>
         <p>made it</p>
     <% end %>
@@ -61,15 +61,16 @@ var url_list_arr = <%= raw @urls.to_json %>;
 
                 success: function() {
                     alert('success');
-                    window.location.reload();
-                    alert('reloaded');
                     var all_child_data = <%= raw @all_child_data.to_json %>;
                     var parent = <%= raw @parent.to_json %>;
                     var p_tags = <%= raw @all_p_tags.to_json %>;
 
+
                     alert(all_child_data);
                     alert(parent);
                     alert(p_tags);
+                    window.location.reload();
+                    alert('reloaded');
                     // var ul = document.getElementById("list");
                     // for (int i = 0; i < all_child_data.length; i++) {
                     //     var li = document.createElement("li");
