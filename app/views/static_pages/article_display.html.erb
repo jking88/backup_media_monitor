@@ -8,38 +8,14 @@
 <div id = "body-container">
     <div id = "mainDisplay">
         <div id = "headDisplay">
-        <% @article_arr = params[:checked_arr] %>
-        <% @article_arr.each do |e| %>
-            <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
-            <% @body = Nokogiri::HTML(@response.body) %>
-            <%= @select = @body.xpath('//title') %>
-            <br>
-        <% end -%>
+            <% @match = params[:parent] %>
+            <%= @match[:title] %>
         </div>
         <div id = "articleBody">
-            <% @article_arr.each do |e| %>
-            <% @response = Typhoeus.get(e, ssl_verifyhost: 0) %>
-            <% @body = Nokogiri::HTML(@response.body) %>
-            <% @select_text = @body.xpath('//a/@href') %>
-            <% @select_text.each do |href| %>
-                <%= href %>
-                <br>
-                <% end %>
-            <br>
-            <% end -%>
+
 
         </div>
         <div id = "articleImages">
-        <% @article_arr.each do |u| %>
-
-            <% @response = Typhoeus.get(u, ssl_verifyhost: 0)%>
-            <% @body = Nokogiri::HTML(@response.body) %>
-            <% @body.xpath("//img/@src").each do |src| %>
-             <% uri = URI.join( u, src ).to_s %>
-
-            <img src=<%=uri%> style = "height: 100px; width: 100px;">
-            <%end%>
-        <%end%>
 
         </div>
    </div>

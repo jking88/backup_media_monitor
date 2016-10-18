@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-
   get 'article_display'            => 'static_pages#article_display'
   post 'article_display'           => 'static_pages#article_display'
   get 'email_display'              => 'static_pages#email_display'

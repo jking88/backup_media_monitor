@@ -4,6 +4,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'net/http'
 require 'mechanize'
+require 'addressable/uri'
 class StaticPagesController < ApplicationController
 respond_to? :html
 
@@ -73,8 +74,16 @@ respond_to? :html
   end
 
   def article_display_helper
-    if @article_arr = params["checked_arr"]
-      redirect_to article_display_path(:checked_arr => @article_arr)
+    if @parent = params["checked_arr"]
+      @response = url_for(action: 'article_display', controller: 'static_pages')
+
+      @uri = Addressable::URI.parse(@response.to_s)
+
+      @params = params.merge({:parent => @parent})
+      @params.delete("checked_arr")
+      @uri.query_values = params
+      @uri.to_s
+
     end
 
   end
@@ -131,7 +140,6 @@ respond_to? :html
 
   def list_view
     @urls = Url.all
-
   end
 
 
