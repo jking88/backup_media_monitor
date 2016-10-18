@@ -72,38 +72,30 @@ respond_to? :html
   def settings
   end
 
+  def article_display_helper
+    if @article_arr = params["checked_arr"]
+      redirect_to article_display_path(:checked_arr => @article_arr)
+    end
+
+  end
+
   def article_display
 
-  @checked_boxes = params[:list_name_ids]
-  @all_comments = Comment.order(:created_at)
+    @checked_boxes = params[:list_name_ids]
+    @all_comments = Comment.order(:created_at)
 
 
-  @title_arr = Array.new
-  @body_arr = Array.new
-  @href_arr = Array.new
+    @title_arr = Array.new
+    @body_arr = Array.new
+    @href_arr = Array.new
 
-  @user = User.find_by id: session[:user_id]
+    @user = User.find_by id: session[:user_id]
 
-  @all_urls = Url.all
-  @test_url = Url.first
-  @css_selectors_arr = Keyword.all
-  @lists = List.all
+    @all_urls = Url.all
+    @test_url = Url.first
+    @css_selectors_arr = Keyword.all
+    @lists = List.all
 
-  if @article_arr = params["article_arr"]
-    redirect_to article_display_path(:checked_arr => @article_arr)
-  end
-  # @article_arr = params["checked_arr"]
-
-  # @article_arr.each do |u|
-  #   @doc = Typhoeus.get(u)
-  #   @page = Nokogiri::HTML(@doc.body)
-  #   @title_arr.push(@page.css('title').text)
-  #   @body_arr.push(@page.css('#body').text)
-  #   @page.xpath("//img/@src").each do |src|
-  #     uri = URI.join( u, src ).to_s
-  #     File.open(File.basename(uri),'wb') { |f| f.write(open(uri).read) }
-  #   end
-  #   end
   end
 
   def article_display_email_list
@@ -153,7 +145,6 @@ respond_to? :html
     end
 
   def article_select
-    @all_child_data = Array.new
   end
 
   def filtered_view

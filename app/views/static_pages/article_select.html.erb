@@ -7,6 +7,8 @@
 <% if @parent = params[:parent] %> <!-- #all of the checkmarked parent websites -->
     <%  @titles = Array.new  %>
     <%  @filted_articles = Array.new %>
+    <%  @all_child_data = Array.new %>
+
     <%  @articles_return = Array.new %> <!-- #array for all of the filtered urls to be added to -->
     <%  if @keyword = params[:keyword] %>
     <%    @r1 = Regexp.new(@keyword.downcase) %> <!-- #create regular exp -->
@@ -43,7 +45,6 @@
     <%                @hash = {:title => @title, :body => @all_p_tags, :url => @child_url, :date => @child_date.to_s} %>
     <%                @all_child_data.push(@hash) %>
     <%            end %>
-
     <%          end %>
     <%        end %>
     <%      end %>
@@ -58,49 +59,41 @@
         <%= match[:body] %><br>
         <%= match[:url] %> <br>
         <%= match[:date] %>
-        <%= check_box_tag match[:url]%> Select this article for further viewing?
+        <%= check_box_tag 'all_child_data', match[:url] %> Select this article for further viewing?
     </tr>
-<!--     <label><input id=<%= match[:url] %> type="checkbox" value=<%= match[:url] %>> Select this article for further viewing?  </label>
- -->
     </label>
-
     <% end %>
+
 </tr>
 <br>
 <br>
 <br>
 <br>
-<%= button_to "Review Selected Articles" %>
+<button id="to_listicle_view"> Review Selected Articles </button> <br>
 <%= link_to 'Back', url_for(:back) %>
 </div>
 <script type="text/javascript">
     alert('here');
-    var all_child_data = [<% @all_child_data.inspect.html_safe %>];
     // var url_name_arr = [];
     // for(var i = 0; i < all_child_data.length; i++) {
     //     url_name_arr.push(all_child_data[i][:]);
     // };
     var checked_arr = [];
         $(document).ready(function() {
-        $("body").on("click", "#to_listicle_view", function () {
+        $("body").on("click", "#to_listicle_view", function() {
             alert('clicked');
-            alert(all_child_data);
-            for (var i = 0; i < all_child_data.length; i++) {
-                if(document.getElementById(all_child_data[i]["url"]).checked) {
-                    alert("added" + all_child_data[i]);
-                    checked_arr.push(all_child_data[i]);
-                };
-            };
-            // $.ajax({
-            //     url: 'article_select_helper',
-            //     type: 'POST',
-            //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-            //     data: { checked_arr, keyword },
-            //     success: function() {
-            //         alert('success');
-
-            //     }
-            // })
+            $('input:checkbox[id=all_child_data]:checked').each(function() {
+                checked_arr.push(this.value);
+            })
+            $.ajax({
+                url: 'article_display_helper',
+                type: 'POST',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                data: { checked_arr },
+                success: function() {
+                    alert('success');
+                }
+            })
     });
 });
 
