@@ -153,7 +153,7 @@ respond_to? :html
     end
 
   def article_select
-
+    @all_child_data = Array.new
   end
 
   def filtered_view

@@ -8,7 +8,6 @@
     <%  @titles = Array.new  %>
     <%  @filted_articles = Array.new %>
     <%  @articles_return = Array.new %> <!-- #array for all of the filtered urls to be added to -->
-    <%  @all_child_data = Array.new %> <!-- #array  that contains a hash of data for each child -->
     <%  if @keyword = params[:keyword] %>
     <%    @r1 = Regexp.new(@keyword.downcase) %> <!-- #create regular exp -->
     <%  end %>
@@ -22,7 +21,7 @@
     <%    if (/.jpg/ =~ href) == nil && (/.png/ =~ href) == nil %><!--  # If it doesn't contain .jpg or .png -->
     <%     @response = Typhoeus.get(href, ssl_verifyhost: 0) %><!--  # makes a request to the href http tag within url -->
     <%     @child_body = Nokogiri::HTML(@response.body) %> <!--  # gets the html of the url -->
-    <%      @all_p_tags = @child_body.xpath("//body//p").to_s %>
+    <%      @all_p_tags = @child_body.xpath("//body//p").inner_html %>
     <%      @all_p_tags.force_encoding(Encoding::UTF_8) %>
     <%      if !@all_p_tags.valid_encoding? %>
                   <%  for i in (0...@all_p_tags.size) %>
@@ -51,17 +50,60 @@
     <%    end %>
     <%  end %>
 <div id = "article_list">
-<ul>
+<tr>
     <% @all_child_data.each do |match| %>
-    <li>
-    <%= match[:title] %> <br>
-    <%= match[:body] %><br>
-    <%= match[:url] %> <br>
-    <%= match[:date] %>
-    </li>
-    <h6>new element</h6>
+    <label>
+    <tr>
+       <h2> <%= match[:title] %> </h2>
+        <%= match[:body] %><br>
+        <%= match[:url] %> <br>
+        <%= match[:date] %>
+        <%= check_box_tag match[:url]%> Select this article for further viewing?
+    </tr>
+<!--     <label><input id=<%= match[:url] %> type="checkbox" value=<%= match[:url] %>> Select this article for further viewing?  </label>
+ -->
+    </label>
+
     <% end %>
-</ul>
+</tr>
+<br>
+<br>
+<br>
+<br>
+<%= button_to "Review Selected Articles" %>
+<%= link_to 'Back', url_for(:back) %>
 </div>
+<script type="text/javascript">
+    alert('here');
+    var all_child_data = [<% @all_child_data.inspect.html_safe %>];
+    // var url_name_arr = [];
+    // for(var i = 0; i < all_child_data.length; i++) {
+    //     url_name_arr.push(all_child_data[i][:]);
+    // };
+    var checked_arr = [];
+        $(document).ready(function() {
+        $("body").on("click", "#to_listicle_view", function () {
+            alert('clicked');
+            alert(all_child_data);
+            for (var i = 0; i < all_child_data.length; i++) {
+                if(document.getElementById(all_child_data[i]["url"]).checked) {
+                    alert("added" + all_child_data[i]);
+                    checked_arr.push(all_child_data[i]);
+                };
+            };
+            // $.ajax({
+            //     url: 'article_select_helper',
+            //     type: 'POST',
+            //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            //     data: { checked_arr, keyword },
+            //     success: function() {
+            //         alert('success');
+
+            //     }
+            // })
+    });
+});
+
+</script>
 </body>
 </html>
