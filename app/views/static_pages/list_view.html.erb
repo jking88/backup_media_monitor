@@ -23,10 +23,6 @@
     </div>
     <div id="articles_filtered_list_view">
 
-    <% if @all_child_data = session[:all_child_data] %>
-        <%= @all_child_data[0][:title] %>
-        <p>made it</p>
-    <% end %>
 
    <ul id= "child_list">
 
@@ -36,57 +32,38 @@
     </div>
 </div>
 <script type="text/javascript">
-var url_list_arr = <%= raw @urls.to_json %>;
+    var url_list_arr = <%= raw @urls.to_json %>;
     var url_name_arr = [];
     for(var i = 0; i < url_list_arr.length; i++) {
         url_name_arr.push(url_list_arr[i]["url"]);
     };
+    alert("url_name_arr " + url_name_arr );
     var checked_arr = [];
 
         $(document).ready(function() {
         $("body").on("click", "#to_article_view", function () {
+
             var keyword = document.getElementById("search_text").value;
             for (var i = 0; i < url_name_arr.length; i++) {
                 if(document.getElementById(url_name_arr[i]).checked) {
                     alert("added" + url_name_arr[i]);
                     checked_arr.push(url_name_arr[i]);
                 };
+                alert('in for loop');
             };
-
+            alert('work');
             $.ajax({
-                url: '/list_view',
+                url: 'article_select_helper',
                 type: 'POST',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 data: { checked_arr, keyword },
-
                 success: function() {
                     alert('success');
-                    var all_child_data = <%= raw @all_child_data.to_json %>;
-                    var parent = <%= raw @parent.to_json %>;
-                    var p_tags = <%= raw @all_p_tags.to_json %>;
 
-
-                    alert(all_child_data);
-                    alert(parent);
-                    alert(p_tags);
-                    window.location.reload();
-                    alert('reloaded');
-                    // var ul = document.getElementById("list");
-                    // for (int i = 0; i < all_child_data.length; i++) {
-                    //     var li = document.createElement("li");
-                    //     li.appendChild(document.createTextNode(all_child_data[i]));
-                    //     ul.appendChild(li);
-                    // }
 
                 }
             })
-
-            // $.ajax({
-            //     url: '/list_view'
-            //     type: 'GET',
-            //     beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-            //     data: {  }
-            // })
+            alert('hello');
     });
 });
 

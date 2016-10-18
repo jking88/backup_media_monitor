@@ -11,14 +11,7 @@ Rails.application.routes.draw do
 
   root 'sessions#new'
 
-  get 'home'                       => 'static_pages#home'
-  get 'graphs'                     => 'static_pages#graphs'
-  get 'manage'                     => 'static_pages#manage'
-  get 'home'                       => 'static_pages#home'
-  get 'payment'                    => 'static_pages#payment'
-  get 'profile'                    => 'static_pages#profile'
-  get 'search'                     => 'static_pages#search'
-  get 'settings'                   => 'static_pages#settings'
+
   get 'article_display'            => 'static_pages#article_display'
   post 'article_display'           => 'static_pages#article_display'
   get 'email_display'              => 'static_pages#email_display'
@@ -27,10 +20,10 @@ Rails.application.routes.draw do
   post 'sent_mail_review'          => 'static_pages#sent_mail_review'
   get 'sent_mail_review'           => 'static_pages#sent_mail_review'
   get 'list_view'                  => 'static_pages#list_view'
-  post 'list_view'                 => 'static_pages#list_view_helper'
+  post 'article_select_helper'     => 'static_pages#article_select_helper'
   get 'filtered_view'              => 'static_pages#filtered_view'
   post 'filtered_view'             => 'static_pages#filtered_view'
-
+  get 'article_select'             => 'static_pages#article_select'
   post 'urls/new'                  => 'urls#new'
 
   get 'new'                        => 'user_url#new'

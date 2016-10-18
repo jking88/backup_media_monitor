@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def replace_invalid_characters(str)
+      for i in (0...str.size)
+        if !str[i].valid_encoding?
+          str[i]="?"
+        end
+      end
+    end
+
 
 
 end
