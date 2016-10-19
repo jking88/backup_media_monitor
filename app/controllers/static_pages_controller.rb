@@ -5,6 +5,7 @@ require 'open-uri'
 require 'net/http'
 require 'mechanize'
 require 'addressable/uri'
+require 'delayed_job'
 class StaticPagesController < ApplicationController
 respond_to? :html
 
@@ -73,22 +74,14 @@ respond_to? :html
   def settings
   end
 
-  def article_display_helper
-    if @parent = params["checked_arr"]
-      @response = url_for(action: 'article_display', controller: 'static_pages')
-
-      @uri = Addressable::URI.parse(@response.to_s)
-
-      @params = params.merge({:parent => @parent})
-      @params.delete("checked_arr")
-      @uri.query_values = params
-      @uri.to_s
-
-    end
-
-  end
 
   def article_display
+    if @parent = params["checked_arr"]
+      @destringified_parent = Array.new
+      @parent.each do |each|
+        @destringified_parent.push(each)
+      end
+    end
 
     @checked_boxes = params[:list_name_ids]
     @all_comments = Comment.order(:created_at)
@@ -104,6 +97,11 @@ respond_to? :html
     @test_url = Url.first
     @css_selectors_arr = Keyword.all
     @lists = List.all
+    @test_var = 'test'
+
+    respond_to do |format|
+      format.js
+    end
 
   end
 

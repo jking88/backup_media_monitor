@@ -4,6 +4,7 @@
     <title>Article Select</title>
 </head>
 <body>
+
 <% if @parent = params[:parent] %> <!-- #all of the checkmarked parent websites -->
     <%  @titles = Array.new  %>
     <%  @filted_articles = Array.new %>
@@ -70,10 +71,10 @@
 <br>
 <br>
 <button id="to_listicle_view"> Review Selected Articles </button> <br>
+
 <%= link_to 'Back', url_for(:back) %>
 </div>
 <script type="text/javascript">
-    alert('here');
     // var url_name_arr = [];
     // for(var i = 0; i < all_child_data.length; i++) {
     //     url_name_arr.push(all_child_data[i][:]);
@@ -81,17 +82,16 @@
     var checked_arr = [];
         $(document).ready(function() {
         $("body").on("click", "#to_listicle_view", function() {
-            alert('clicked');
             $('input:checkbox[id=all_child_data]:checked').each(function() {
                 checked_arr.push(this.value);
             })
             $.ajax({
-                url: 'article_display_helper',
+                url: 'article_display',
                 type: 'POST',
+                format: 'html',
                 beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
                 data: { checked_arr },
                 success: function() {
-                    alert('success');
                 }
             })
     });
